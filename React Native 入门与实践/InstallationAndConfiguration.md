@@ -1,0 +1,225 @@
+﻿# react-native 安装流程
+
+### 本教程只面向于windows开发环境下，Android环境的搭建。
+
+#### 首先需要安装相关环境以及配置：
+1. python2.7 地址： https://www.python.org/ftp/python/2.7.12/python-2.7.12.msi
+或者去官网下载
+2. java SDK 1.8或更高版本，选择当前系统对应的java版本安装。 地址： http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+3. Node和npm 最新版， 地址：https://nodejs.org/en/
+4. 安装完npm后执行 `npm install -g react-native-cli` ， React Native命令行工具
+5. 安装Android Studio 
+
+### 安装python
+
+python2.7 地址： https://www.python.org/ftp/python/2.7.12/python-2.7.12.msi 
+
+或者去官网下载。
+
+安装成功后在电脑的系统属性中点击环境变量
+
+选中变量名为path的项，点击编辑。
+
+将刚才python安装后的目录填到当前变量值的后面。
+
+![alt](http://www.2cto.com/uploadfile/Collfiles/20140917/20140917084350325.jpg)
+
+点击确定退出。
+
+![alt](http://www.2cto.com/uploadfile/Collfiles/20140917/20140917084350327.jpg)
+
+新开命令行工具在里面运行`python -v, python -h` 如果能正常返回版本号等信息 则表示安装成功。
+
+**python版本不支持3，如果安装错误请卸载重装**
+
+
+***
+### Java SDK安装
+
+Java安装流程和python类似，记得把安装成功后的目录添加到环境变量中哦！
+
+验证安装成功方式一样， 在命令行工具中运行`java -version` 能正确返回java版本号即可。
+
+**java版本不得低于1.8，切记**
+
+***
+
+### Node和npm安装
+
+地址：
+
+https://nodejs.org/en/
+
+安装完成后添加环境变量，例如我的 ：`C:\Users\huangliang\AppData\Roaming\npm;`
+
+验证方法： 在命令行工具中输入 `node -v ,npm -version`能正常返回版本号即可。
+***
+
+### Android Studio 安装
+
+地址：
+
+https://developer.android.com/studio/index.html
+
+该地址必须翻墙才能访问，或者自行找国内的下载站点。*推荐使用迅雷等下载软件下载。*
+
+Android Studio包含了运行和测试React Native应用所需的Android SDK和模拟器。
+
+>除非特别注明，请不要改动安装过程中的选项。比如Android Studio默认安装了 Android Support Repository，而这也是React Native必须的（否则在react-native run-android时会报appcompat-v7包找不到的错误）。
+
+* 确定所有安装都勾选了，尤其是`Android SDK`和`Android Device Emulator`。
+
+* 安装完成后，在Android Studio的欢迎界面中选择`Configure | SDK Manager`。
+
+![alt](http://reactnative.cn/static/docs/0.28/img/react-native-android-studio-configure-sdk-windows.png)
+
+* 在`SDK Platforms`窗口中，选择`Show Package Details`，然后在`Android 6.0 (Marshmallow)`中勾选`Google APIs`、`Intel x86 Atom System Image`、`Intel x86 Atom_64 System Image`以及`Google APIs Intel x86 Atom_64 System Image`。
+
+![alt](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/124.png)
+
+* 在`SDK Tools`窗口中，选择`Show Package Details`，然后在`Android SDK Build Tools`中勾选`Android SDK Build-Tools 23.0.1`。（必须是这个版本）
+
+***
+### ANDROID_HOME环境变量
+
+确保ANDROID_HOME环境变量正确地指向了你安装的Android SDK的路径。
+
+打开`控制面板` -> `系统和安全` -> `系统` -> `高级系统设置` -> `高级` -> `环境变量` -> `新建`
+
+![alt](http://reactnative.cn/static/docs/0.28/img/react-native-android-sdk-environment-variable-windows.png)
+
+> 具体的路径可能和上图不一致，请自行确认。
+
+#### 将Android SDK的Tools目录添加到PATH变量中
+
+你可以把Android SDK的tools和platform-tools目录添加到`PATH`变量中，以便在终端中运行一些Android工具，例如`android avd`或是`adb logcat`等。
+
+>`adb`命令可能会被AVG杀毒软件提示，这里添加到例外列表即可。
+
+打开`控制面板` -> `系统和安全` -> `系统` -> `高级系统设置` -> `高级` -> `环境变量` -> `选中PATH` -> `双击进行编辑`
+
+> 路径可能不一致
+
+![alt](http://reactnative.cn/static/docs/0.28/img/react-native-android-tools-environment-variable-windows.png)
+
+***
+
+### 初始化项目
+
+`react-native init AwesomeProject`
+
+`AwesomeProject`是项目名字，随意。 等待几分钟到十分钟（具体视网络情况而定）初始化完成
+
+如果时间过长请取消重试。
+
+成功后会看到如下界面
+
+![alt](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/91.png)
+
+
+**运行package**
+
+在命令行中进入项目目录，输入`react-native start`，等待一段时间：
+![alt](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/1110.png)
+
+这时候可以用浏览器访问`http://localhost:8081/index.android.bundle?platform=android`，如果可以访问表示服务器端已经可以了。
+
+![alt](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/125.png)
+***
+### 开启模拟器或是连接Android手机
+
+#### 开启模拟器
+       
+打开`Android Studio`新建一个空白项目，点击
+
+![alt](https://dn-anything-about-doc.qbox.me/document-uid85931labid1376timestamp1443084172464.png/wm)
+
+创建一台模拟器。
+
+
+![alt](https://dn-anything-about-doc.qbox.me/document-uid85931labid1376timestamp1443084277658.png/wm) 
+
+之后按照流程创建成功后，
+
+再点击AVD Manager 进入如下界面 启动模拟器
+![alt](https://dn-anything-about-doc.qbox.me/document-uid85931labid1376timestamp1443086106984.png/wm)
+
+之后在命令行运行`adb devices`
+
+
+如果list中出现emulator-xxxx则表示模拟器已启动成功。
+
+>这里可能会出现提示开启BIOS的VT（虚拟化视图）的warning，请按照
+http://jingyan.baidu.com/article/8ebacdf0261d3249f65cd531.html
+中的步骤开启BIOS。
+
+#### 连接Android手机
+
+Android手机插入USB，打开手机的USB调试模式。
+
+同样执行adb devices 来查看list中是否有连接设备。
+
+***
+
+### `react-native run-andriod`事宜
+
+在调用react-native run-android命令时，其实这个命令就是执行的两部分操作1是构建你的android项目并生成apk，另外一个是打开react-native的package管理工具同时编译你的js文件，其实可以在项目根目录的package.json下找到
+
+![alt](http://7jpp2v.com1.z0.glb.clouddn.com/44.png)
+
+在命令行工具中运行`react-native run-andriod`，激动人心的时刻到了，不出意外的话命令行执行会报错，错误有各式各样的，以下是错误集锦以及解决方法。
+
+#### `Unknown failure`
+* ![alt](http://live.dz11.com/resource/2016/07/29/dy_asset_pkg/a16e26adfc2bfb1a0231a495bc0e3742.png)
+* 将 android/build.gradle 第 8 行的版本号改成 1.2.3 即可
+![alt](http://live.dz11.com/resource/2016/07/29/dy_asset_pkg/690eafeed00e5392ed856caa7f5d6f89.png)
+
+* 再来一次，App 跳出来了！然而，然而是红色的错误界面吖，无论怎么 RELOAD JS 都提示 `Unable to download JS bundle`。
+![alt](http://live.dz11.com/resource/2016/07/29/dy_asset_pkg/ad149ce686e75477696e5d141ca9a9f0.png)
+* 这回真的好了！大幅度摇一摇手机，调出开发者菜单，我喜欢 Enable Live Relaod，然后就来改改index.android.js：
+
+* ![alt](http://live.dz11.com/resource/2016/07/29/dy_asset_pkg/667668861ea91a716e24c62a6b77fa56.png)
+
+>参考链接 http://csbun.github.io/blog/2015/12/starting-react-native-with-android/
+
+#### `connection timed out`
+
+（需要翻墙导致）
+>Building and installing the app on the device (cd android && gradlew.bat install 
+Debug)… 
+Downloading http://services.gradle.org/distributions/gradle-2.4-all.zip
+
+>Exception in thread “main” java.net.ConnectException: Connection timed out: conn 
+ect 
+at java.net.DualStackPlainSocketImpl.connect0(Native Method) 
+
+解决方法： 
+手动下载这个文件 http://services.gradle.org/distributions/gradle-2.4-all.zip 修改{MyProject-path}\android\gradle\wrapper\gradle-wrapper里的distributionUrl为本地路径，例如：
+
+>distributionUrl=file:///D:/ReactNative/gradle-2.4-all.zip
+
+***
+
+### 命令行开启模拟器
+
+命令行中执行`android avd`中查看模拟机器的名称，之后运行`emulator @name`即可快速开启模拟器。
+
+***
+
+### 调试
+
+Build success之后，运行手机中的app，报错
+
+![alt](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/151.png)
+
+这时候我们摇一摇手机，点击Dev Settings后，点击Debug server host & port for device,设置IP和端口
+
+`“摇一摇”这个动作在模拟器可以用ctrl+M (Menu)来调出Dev setting菜单`。
+
+这里的IP是电脑的IP，不知道的可以在命令行中输入ipconfig进行查询，端口号固定8081
+
+设置完成后，回到空白页面，再次摇一摇手机，选择Reload JS，程序就运行起来，出现Welcome to React Native！
+
+![alt](http://lookcode-wordpress.stor.sinaapp.com/uploads/2016/01/20.png)
+
+> 当前文档还有很多不完善的地方，如果大伙使用中碰到安装bug可以联系我。~_~

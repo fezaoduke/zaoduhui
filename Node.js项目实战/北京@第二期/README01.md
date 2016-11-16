@@ -1,4 +1,4 @@
-###第一章 安装Node.js及相关知识点
+###第一章 安装Node.js 
     写在前面：个人使用Mac系统，所以后面的安装运行都在Mac环境，其他方法可自行查找。
 ####安装方法
 >1. 一般情况下，系统已安装HomeBrew，可直接在命令行中运行以下命令
@@ -37,16 +37,19 @@ var obj={
         导入和导出模块：导出：exports.mess=mess;
                      引用：var mess= require('./routes/messages.js');
                      推荐使用var mess = require(path.join(__dirname,'routes','messages'))    
+
 ####Node.js的核心模块
 > * http
 http是Node.js从HTTP服务器获取相应内容的主要模块
+
 >> * http.createServer():返回一个新的Web服务器对象
 >> * http.listen():在指定的主机名和端口上建立连接
 >> * http.createClient():建立一个可以向其他服务器发送请求的客户端
 >> * http.ServerRequest():将请求信息传递给request处理事件
 >>> * data:消息题数据被接受时发出该事件
 >>> * end:每次请求只会触发一次
->>> * request.method():字符串格式的请求方法
+
+>>* request.method():字符串格式的请求方法
 >>> * request.url():请求的URL字符串
 >> * http.ServerResponse():作为请求处理事件输出内容
 >>> * response.writeHead():想请求的客户端发送响应头

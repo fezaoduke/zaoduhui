@@ -1,15 +1,16 @@
 ###第一章 安装Node.js 
     写在前面：个人使用Mac系统，所以后面的安装运行都在Mac环境，其他方法可自行查找。
 ####安装方法
->1. 一般情况下，系统已安装HomeBrew，可直接在命令行中运行以下命令
->>>brew install node 
->>>brew install npm  (npm为包管理工具，一般安装node时就安装了npm)
->2. 检查安装 
->>>npm -v   
->>>node -v  
->3. 进入node虚拟运行环境REPL
->>>node(可在此执行js和node.js代码)
->4. 加载node.js脚本 
+1. 一般情况下，系统已安装HomeBrew，可直接在命令行中运行以下命令
+* brew install node 
+* brew install npm  (npm为包管理工具，一般安装node时就安装了npm)
+2. 检查安装 
+* npm -v   
+* node -v  
+3. 进入node虚拟运行环境REPL
+* node(可在此执行js和node.js代码)
+4. 加载node.js脚本 
+* node xxx.js
 ####基础语法
 ***基本数据类型***(Boolean、String、Number、RegExp)
 ***特殊数据类型***

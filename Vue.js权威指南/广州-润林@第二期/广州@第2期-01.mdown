@@ -1,0 +1,218 @@
+
+##第二，三章笔记
+
+
+###自定义插值语法：当与后台冲突或者想要自定义时可以使用：
+
+```javascript
+Vue.config.delimiters = ['${', '}']
+```
+
+###Vue实例基本形式：
+```javascript
+var vm=new Vue({
+    el:".test",
+    data:{},
+    methods:{},
+    computer:{},
+
+    ready:function(){},   //ready的时候调用ajax请求数据
+   
+   components:{
+
+   },
+   transitions:{
+   
+   }
+})
+```
+
+###数据绑定
+```html
+<span>{{message}}</span>
+```
+
+###对于单个数据花括号，可以将数据放在v-text里面，即将
+
+```html
+<span v-text="message"></span>
+```
+
+
+###html绑定
+对于需要转意的data，需要放在3个花括号里面
+格式：<span>{{{message}}}</span>
+
+###或者换成
+```html
+<span v-html="message"></span>
+```
+
+###只绑定一次数据
+```html
+{{*message}}
+```
+
+###页面闪烁问题处理：
+加载数据时大段代码出现花括号解决：
+在父级加属性v-cloak
+
+```html
+<div v-cloak>
+    <p></p>
+    <div></div>
+</div>
+```
+同时：在style里面：
+```html
+<style type="text/css" >
+    [v-cloak]{
+        display: none;
+    }
+</style>
+```
+###对于单行闪烁，将数据放在v-text即可
+```html
+<span v-text="message"></span>
+```
+
+##双向数据绑定 将v-model的值设置为data中的值即可实现双向数据绑定
+```html
+<input type="text" v-medol="message">
+<div>{{message}}</div>
+```
+
+```javascript
+    new Vue({
+        el:"#test",
+        data:{
+            message:""
+        }
+    })
+```
+
+##绑定表达式（只支持简易的表达式，如三元）
+```html
+{{message?message:我没有数据哦}}
+```
+
+###条件渲染
+v-if   ：将元素从DOM中remove  
+
+v-show ：display的切换 频繁使用用show
+
+###else需跟在v-if或者v-show后面
+v-else
+
+```html
+<div v-if="hidden"></div>
+<div v-else></div>
+new Vue({
+    data:{
+        hidden:true
+    }
+})
+```
+
+```html
+<div v-show="hidden"></div>
+new Vue({
+    data:{
+        hidden:true
+    }
+})
+```
+
+###如果多个标签，可以放在<template></template>里面，template不会被渲染
+
+```html
+<template v-if="hidden">
+    <div>123</div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</template>
+```
+
+###v-show不支持tmeplate语法
+
+
+###遍历
+###v-for="item in items" 默认下标为$index,默认value为$key
+###v-for="(i,v) in items" 可以自己指定下标 
+###循环时会自动清除重复的，可通过track-by=$index
+
+
+##动态绑定数据v-bind
+
+```html
+<div src={{src}}></div> //可以使用，但不鼓励使用
+<div v-bind:src="src"></div>  //建议使用过这种方式
+<div :src="src"></div>//v-bind：src="src"的简写方式
+```
+##绑定事件v-on:click="name"
+
+```html
+<div v-on:click="ev"></div>
+<div @click="ev"></div> 简写
+<div v-on:click="ev()"></div>  需要参数时
+<div v-on:click="ev($event)"></div>   传递事件
+
+<div v-on:click.stop="ev"></div>阻止事件冒泡
+<div v-on:click.prevent="ev"></div>阻止默认事件
+<div v-on:click.prevent.stop="ev"></div> 2个都阻止
+<div v-on:click.self="ev"></div> 无视事件冒泡只能自己触发
+```
+
+对应的事件需要写在实例的methods里面
+```javascript
+    new Vue({
+        el:".test",
+        data:{
+        },
+        methos:{
+            name:function(ev){
+                alert("you have been clicked"+ev)
+            }
+        }
+    })
+```
+
+```html;
+<div @keyup="ev"></div> 键盘抬起事件
+<div @keydown="ev"></div> 键盘按下事件
+<div @keyup.enter="ev"></div>  指定那个键（如enter键）
+<div @keyup.left="ev"></div>   指定那个键（如left键）
+```
+
+###绑定style：有多种形式
+```html
+<div :style="sty"></div>
+```
+
+```javascript
+new Vue({
+    data:{
+        sty:{
+            color:"red",
+            background:"blue"
+        }
+    }
+})
+```
+###绑定class：有多种形式
+<div :class="class"></div>
+```javascript
+new Vue({
+    data:{
+        class:{
+            color1:true,
+            color2:true
+        }
+    }
+})
+```
+
+

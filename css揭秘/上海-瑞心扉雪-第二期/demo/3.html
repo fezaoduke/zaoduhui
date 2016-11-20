@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>灵活的背景定位</title>
+<style>
+.div1 {
+	border: 1px solid #000;
+	width: 200px;
+	height: 250px;
+	padding:20px;
+	background:url(imgs/1.jpg) no-repeat bottom 20px right 20px #58a;
+	box-sizing:border-box;
+	margin-bottom:10px;
+}
+.div2{
+	border: 1px solid #000;
+	width: 200px;
+	height: 250px;
+	padding:20px;
+	background:url(imgs/1.jpg) no-repeat bottom right #58a;
+	box-sizing:border-box;
+	background-origin:content-box;
+}
+.div3{
+	border: 1px solid #000;
+	width: 200px;
+	height: 250px;
+	padding:20px;
+	background:url(imgs/1.jpg) no-repeat #58a;
+	box-sizing:border-box;
+	background-position:calc(100% - 20px) calc(100% - 20px)
+}
+
+</style>
+</head>
+<body>
+	<h4>这是使用background-position扩展语法实现的背景偏移定位</h4>
+	<div class="div1"></div>
+	<h4>这是使用background-origin实现的背景偏移定位</h4>
+	<div class="div2"></div>
+	<h4>这是使用calc()实现的背景偏移定位</h4>
+	<div class="div3"></div>
+	</body>
+</html>

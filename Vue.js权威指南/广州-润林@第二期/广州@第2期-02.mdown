@@ -1,0 +1,118 @@
+##这是一份没有规律的日记！！！
+
+
+
+##计算属性 计算属性computed的值取决于return返回的值;
+```javascript
+data:{
+    num:1,
+    price:50
+}
+conputed:{
+    total:{
+        get:funciton(){
+            return this.num*this.price
+        },
+        set:function(val){
+            this.num=val/this.price
+        }
+    }
+}
+```
+
+##过滤器
+```html
+{{"haha"|capitalize}}
+{{message | capitalize}} 首字母大写
+{{message | uppercase}} 首字母大写
+{{message | lowercase}} 首字母大写
+{{message | currency}} 首字母大写
+{{message | json}} 对象过滤器。转化为字符串形式
+{{message| debounce}}  延时数据刷新事件
+{{message| filterBy}}  
+{{message| orderBy}}  排序
+{{message| limitBy}}  限制个数
+```
+
+
+###debounce 配合时间延迟执行，即先清除定时器settimeout
+```html
+<input type="text" @keyup="name|debounce 2000 ">  事件延迟2秒
+```
+
+###limitBy (num)限制个数，配和循环，如：注意需要放在引号里
+###limitBy接受2个参数，第一个参数为保留几个，第二个参数为从第几个开始保留，默认从0开始
+```html
+        <ul>
+            <li v-for="item in arr|limitBy 4">{{item}}</li>
+        </ul>
+```
+
+###filterBy 筛选过滤器
+
+        <ul>
+            <li v-for="item in arr|filterBy 's'">{{item}}</li>
+        </ul>
+
+###orderBy  参数为1或者-1，表示从大到小或者小到大
+```html
+<ul v-for="item in items|orderBy item 1">  
+    <li>{{item}}</li>
+</ul>
+```
+
+##自定义过滤器
+```javascript
+vue.filter("fnname",function(input){
+    return input+input
+})
+```
+
+
+###自定义指令
+```javascript
+Vue.directive("newDir",fun(){
+    var odiv=this.el   //获得元素即DOM
+})
+```
+
+###使用时，需要补上"v-"开头   <div v-newDir></div>
+
+##动画：
+###形式1：需要先加上transition="example",然后在class中定义3个类名：
+```css
+.example-transition{
+    transition:all 2s ease
+}
+.example-enter{
+    xxx
+}
+.example-leave{
+    xxx
+}
+```
+
+```html
+<div transition="example" class="animated"></div>
+```
+
+###形式2，在transitons里面定义enterClass和leftClass，配合css库使用
+```javascript
+new Vue({
+    el：".animated",
+    data:{},
+    mtehods:{},
+    computed:{},
+    components:{},
+    transitions:{
+        //预先定义好类名，配合animated.css使用为佳
+        example:{
+            enterClass:"test1",
+            leftClass:"test2"
+        }
+    }
+})
+```
+
+
+

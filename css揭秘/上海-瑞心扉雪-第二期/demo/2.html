@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>多重边框</title>
+<style>
+.div1{
+	width: 100px;
+	height: 60px;
+	margin: 25px;
+	background: yellowgreen;
+	box-shadow: 0 0 0 10px #655,
+	0 0 0 15px deeppink,
+	0 2px 5px 15px rgba(0,0,0,.6);
+}
+.div2{
+
+	width: 100px;
+	height: 60px;
+	margin: 15px;
+	background: yellowgreen;
+	border:10px solid #655;
+	outline:5px dashed deeppink;
+}
+.div3{
+	width: 110px;
+	height: 60px;
+	margin: 12px;
+	background: #655;
+	border-radius:5px;
+	border:10px solid #655;
+	outline:1px dashed white;
+	outline-offset:-10px;
+}
+
+
+</style>
+</head>
+<body>
+	<div class="div1">box-shadow实现效果</div>
+	<div class="div2">outline实现效果</div>
+	<div class="div3">缝边效果</div>
+	</body>
+</html>

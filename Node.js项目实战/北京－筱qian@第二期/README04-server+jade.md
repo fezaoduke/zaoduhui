@@ -55,6 +55,21 @@ F 启动服务
         );
         
 
+        
+G 另外附一个自己启的express的server,没有用模版引擎，只运行index.html。这里有不适合的地方还请指导，只是在本地能跑起来？？？
+
+        var express = require('express');
+        var path = require('path');
+        var port = process.env.POrt || 3000;
+        var app = express();                  //实例化express对象
+        
+        app.set('views',path.join(__dirname,'./'));    //设置视图路径
+        app.use(express.static(path.join(__dirname,'./')));  //引入静态文件
+        app.listen(port);     //监听端口
+        
+        app.get('/',function(req,res){
+            res.sendfile('index.html');    //这里代替render(),用sendfile()传送.html文件，因为没有用模版文件。
+        });
 
 
 ###模版引擎 jade、handlebars
@@ -221,3 +236,52 @@ style.  script.
         block content
             .main-content
 终于end了。。。。
+
+
+####单独使用jade
+1. 安装Jade模块
+    
+    npm install jade --save -g
+2. 创建一个Jade文件（如jade-example.jade）
+
+        .header
+            h1= title
+            p
+            .body
+                p= body
+            .footer
+                div= By
+                    a(href="http//..../#{author.twitter}") = author.name
+                ul 
+                    each tag, index in tags
+                        li= tag
+                        
+    用编码的方式给title、author、tags传值，用命令行参数的形势给body传值
+    
+            var jade = require('jade'),
+                fs = require('fs');
+                
+            var data = {
+                title:'practical Node.js',
+                author:{
+                    twitter:'azat_co',
+                    name:'Azat
+                },
+                tags:['express','node','js']
+            }
+            data.body = process.argv[2];
+            
+            fs.readFile('jade-example.jade','utf-8',function(error,source){
+                var template = jade.compile(source);
+                var html = template(data)
+                console.log(html)
+            });
+    命令行运行node jade-example.js 'email body'时，会输出对应的HTML；jade.compile(source),对应的还有jade.render()和jade.readerFile()
+    
+            var html = jade.render(source,data);
+            或
+            jade.renderFile('jade-example.jade',data,function(error,html){
+                console.log(html)
+            })
+            
+写在后面：终于耐着性子写完了。。。。因为是在找工作期间，比较有时间和精力写笔记，如果后面记得不好，也不要介意。。

@@ -125,6 +125,7 @@ MongoDb shell操作命令：
 * insert()
 
         要插入数据到 MongoDB 集合，需要使用 MongoDB 的 insert() 或 save() 方法
+        db.集合名.insert({title:'mongo..',...})
 * find()
 
         要从MongoDB 查询集合数据，需要使用MongoDB 的 find() 方法。db.COLLECTION_NAME.find()
@@ -139,6 +140,99 @@ MongoDb shell操作命令：
 
 
 
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+####MongoDB更新文档
+MongoDB使用update()和save()方法来更新集合中的文档
+
+* update()方法用于更新已存在的文档
+
+        db.collection.update(
+           <query>,    //查询条件
+           <update>,   //update的对象和一些更新的操作符
+           {
+             upsert: <boolean>,      //是否插入obj，默认false
+             multi: <boolean>,       //默认false，只更新找到的第一条记录
+             writeConcern: <document>     //掏出异常的级别
+           }
+        )
+        
+* save()方法通过传入的文档来替换已有的文档
+
+        db.collection.save(
+           <document>,
+           {
+             writeConcern: <document>
+           }
+        )
+        
+####MongoDb删除文档
+
+* remove()
+
+        db.collection.remove(
+               <query>,
+               {
+                 justOne: <boolean>,     true之删除一个文档
+                 writeConcern: <document>    抛出异常的级别
+               }
+            )
+            
+####MongoDB查询文档
+        
+* db.col.find().pretty()   集合col中所有的数据
+* MongoDB AND条件
+    
+    MongoDB的find()方法可以传入多个键key，没个键以,隔开
+        
+            db.col.find({key1:value1, key2:value2}).pretty()
+* MongoDB OR 条件
+
+            db.col.find(
+               {
+                  $or: [
+                     {key1: value1}, {key2:value2}
+                  ]
+               }
+            ).pretty()
+            
+* MongoDB 条件操作符
+
+        用于比较两个表达式并从mongoDB集合中获取数据
+        $gt >
+        $lt <
+        $gte >=
+        $lte <=
+        
+    查询 db.col.find({likes : {$gte : 100}})
+    
+####MongoDB $type条件操作符
+$type操作符是基于BSON类型检索集合中匹配的数据类型，并返回结果。
+        
+        db.col.find({"title" : {$type : 2}})  //获取col集合中title为string的数据
+        
+        
+            类型  数字  备注
+            Double  1    
+            String  2    
+            Object  3    
+            Array   4    
+            Binary data 5    
+            Undefined   6   已废弃。
+            Object id   7    
+            Boolean 8    
+            Date    9    
+            Null    10   
+            Regular Expression  11   
+            JavaScript  13   
+            Symbol  14   
+            JavaScript (with scope) 15   
+            32-bit integer  16   
+            Timestamp   17   
+            64-bit integer  18   
+            Min key 255 Query with -1.
+            Max key 127
+        
 
 
     

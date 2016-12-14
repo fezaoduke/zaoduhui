@@ -7,7 +7,7 @@
 
 ## 每期图书
 
-### 第三期 @2016.11.07
+### 第三期 @2016.12.19
 书名 | 借阅者
 --------- | -------------
 [ES6 标准入门（第2版）](https://book.douban.com/subject/26708954/) | @lee 
@@ -18,7 +18,7 @@
 [Vue.js权威指南](https://book.douban.com/subject/26869340/) | @18511162816
 [React Native入门与实战](https://book.douban.com/subject/26694486/) | @xi_lin
 [深入React技术栈](https://book.douban.com/subject/26918038/) | @hyj295875108
-[DOM启蒙](https://book.douban.com/subject/25882606/) | Rni-L
+[DOM启蒙](https://book.douban.com/subject/25882606/) | @15846610765
 
 
 ### 第二期 @2016.11.07

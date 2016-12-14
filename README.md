@@ -7,6 +7,20 @@
 
 ## 每期图书
 
+### 第三期 @2016.11.07
+书名 | 借阅者
+--------- | -------------
+[ES6 标准入门（第2版）](https://book.douban.com/subject/26708954/) | @lee 
+[实战ES2015](https://book.douban.com/subject/26899930/) | @alisi999
+[迈向Angular 2：基于TypeScript的高性能SPA框架](https://book.douban.com/subject/26852120/) | @Gerb1993 
+[css揭秘](https://book.douban.com/subject/26745943/) | @忐自、@黄嘉敏
+[React全栈：Redux+Flux+webpack+Babel整合开发](https://book.douban.com/subject/26901067/)| @imjustng
+[Vue.js权威指南](https://book.douban.com/subject/26869340/) | @18511162816
+[React Native入门与实战](https://book.douban.com/subject/26694486/) | @xi_lin
+[深入React技术栈](https://book.douban.com/subject/26918038/) | @hyj295875108
+[DOM启蒙](https://book.douban.com/subject/25882606/) | Rni-L
+
+
 ### 第二期 @2016.11.07
 书名 | 借阅者
 --------- | -------------

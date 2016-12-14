@@ -7,9 +7,9 @@
 - `WeChat` imjustng
 - `Site` http://zdx.link
 - `个人公众号` zdx-it //除博客外的一个属于我个人的网上站点，平时会发点干货，欢迎关注。
-	![个人公众号][image-1]
+![个人公众号][/images/zdx-it.jpg]
 
-### 关于目录和计划
+## 关于目录和计划
 #### 1、现代前端开发
 #### 2、webpack
 > Commit 1

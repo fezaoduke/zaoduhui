@@ -1,4 +1,5 @@
 # Chapter 1 现代前端开发
+> Note：本章内容很重要，但是因为不是本书重点，所以介绍的很简单
 从以下三个方面介绍现代前端开发技术：
 - ES6——新一代的JavaScript语言标准
 - Component组件和模块的发展历程
@@ -103,7 +104,7 @@ JavaScript模块化方案
 
 ## 辅助工具
 ### 包管理器（Package Manager）
-软件包管理器是指在计算机中自动安装、配置、卸载和升级软件包的工具组合。像Ubuntu的`apt-get`、Mac的`homebrew`、Python的`pip`、Ruby的```Gem``，自从Nodejs出现以后，前端开发也有了许多的包管理器，`Bower`、`Component`、`Spm`以及_**`npm`**。_
+软件包管理器是指在计算机中自动安装、配置、卸载和升级软件包的工具组合。像Ubuntu的`apt-get`、Mac的`homebrew`、Python的`pip`、Ruby的\``Gem`，自从Nodejs出现以后，前端开发也有了许多的包管理器，`Bower`、`Component`、`Spm`以及_**`npm`**。_
 
 #### 安装包
 安装包有两种模式，一种是本地安装，一种是全局安装。

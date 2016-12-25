@@ -1,5 +1,3 @@
-# React Native入门与实践
-
 ## CH.1 RN简介
 
 ### 1. 环境搭建
@@ -41,7 +39,7 @@ rninit init Hello --source react-native@0.15.0
   - 勾选`Run scripts only when installed`
 <!--/Note-->
 
-### React
+### 2. React
 
 #### JSX
 
@@ -67,6 +65,6 @@ rninit init Hello --source react-native@0.15.0
 
 #### Virtual Dom
 
-### React Native
+### 3. React Native
 
 #### var {} = React

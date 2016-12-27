@@ -749,6 +749,555 @@ ES6内部使用严格相等运算符（===），判断一个位置是否有值�
 	注意，这种对字符串转义的放松，只在标签模板解析字符串时生效，不是标签模板的场合，依然会报错。
 
 
+#第五章 正则的扩展
+
+#第六章 数值的扩展
+
+#第七章 数组的扩展
+
+#第八章 函数的扩展
+
+
+**基本用法 **
+先判断一下参数y是否被赋值，如果没有，再等于默认值。ES6允许为函数的参数设置默认值，即直接写在参数定义的后面。
+function log(x, y = 'World') {
+  console.log(x, y);
+}
+> 优点：
+
+> 1. 阅读代码的人，可以立刻意识到哪些参数是可以省略的，不用查看函数体或文档；
+> 2. 有利于将来的代码优化，即使未来的版本在对外接口中，彻底拿掉这个参数，也不会导致以前的代码无法运行
+
+
+
+**参数变量是默认声明的，所以不能用let或const再次声明。**
+
+	function foo(x = 5) {
+	  let x = 1; // error
+	  const x = 2; // error
+	}
+
+*  参数默认值可以与解构赋值的默认值，结合起来使用。
+	
+		//--上面代码使用了对象的解构赋值默认值，而没有使用函数参数的默认值。只有当函数foo的参数是一个对象时，变量x和y才会通过解构
+		//--赋值而生成。如果函数foo调用时参数不是对象，变量x和y就不会生成，从而报错。如果参数对象没有y属性，y的默认值5才会生效。
+		function foo({x, y = 5}) {
+		  console.log(x, y);
+		}
+		
+		foo({}) // undefined, 5
+		foo({x: 1}) // 1, 5
+		foo({x: 1, y: 2}) // 1, 2
+		foo() // TypeError: Cannot read property 'x' of undefined
+
+		function fetch(url, { method = 'GET' } = {}) {
+		  console.log(method);
+		}
+		
+		fetch('http://example.com')
+		// "GET"
+
+
+**下面两种写法都对函数的参数设定了默认值，区别是写法一函数参数的默认值是空对象，但是设置了对象解构赋值的默认值；写法二函数参数的默认值是一个有具体属性的对象，但是没有设置对象解构赋值的默认值。**
+
+	// 写法一
+	function m1({x = 0, y = 0} = {}) {
+	  return [x, y];
+	}
+	
+	// 写法二
+	function m2({x, y} = { x: 0, y: 0 }) {
+	  return [x, y];
+	}
+
+	// 函数没有参数的情况
+	m1() // [0, 0]
+	m2() // [0, 0]
+	
+	// x和y都有值的情况
+	m1({x: 3, y: 8}) // [3, 8]
+	m2({x: 3, y: 8}) // [3, 8]
+	
+	// x有值，y无值的情况
+	m1({x: 3}) // [3, 0]
+	m2({x: 3}) // [3, undefined]
+	
+	// x和y都无值的情况
+	m1({}) // [0, 0];
+	m2({}) // [undefined, undefined]
+	
+	m1({z: 3}) // [0, 0]
+	m2({z: 3}) // [undefined, undefined]
+
+ * 参数默认值的位置 --> 通常情况下，定义了默认值的参数，应该是函数的尾参数。因为这样比较容易看出来，到底省略了哪些参数。如果非尾部的参数设置默认值，实际上这个参数是没法省略的。如果传入undefined，将触发该参数等于默认值，null则没有这个效果。
+
+	// 例一
+	function f(x = 1, y) {
+	  return [x, y];
+	}
+	
+	f() // [1, undefined]
+	f(2) // [2, undefined])
+	f(, 1) // 报错
+	f(undefined, 1) // [1, 1]
+	
+	// 例二
+	function f(x, y = 5, z) {
+	  return [x, y, z];
+	}
+	
+	f() // [undefined, 5, undefined]
+	f(1) // [1, 5, undefined]
+	f(1, ,2) // 报错
+	f(1, undefined, 2) // [1, 5, 2]
+
+* 函数的length属性 --> 指定了默认值以后，函数的length属性，将返回没有指定默认值的参数个数。也就是说，指定了默认值后，预期传入的参数个数就不包括这个参数了,length属性将失真。同理，rest参数也不会计入length属性。如果设置了默认值的参数不是尾参数，那么length属性也不再计入后面的参数了。
+
+		(function (a) {}).length // 1
+		(function (a = 5) {}).length // 0
+		(function (a, b, c = 5) {}).length // 2
+		(function(...args) {}).length // 0
+		(function (a = 0, b, c) {}).length // 0
+		(function (a, b = 1, c) {}).length // 1
+
+* 作用域 --> 一个需要注意的地方是，如果参数默认值是一个变量，则该变量所处的作用域，与其他变量的作用域规则是一样的，即先是当前函数的作用域，然后才是全局作用域。
+
+		var x = 1;
+		
+		function f(x, y = x) {
+		  console.log(y);
+		}
+		
+		f(2) // 2
+
+	上面代码中，参数y的默认值等于x。调用时，由于函数作用域内部的变量x已经生成，所以y等于参数x，而不是全局变量x。
+	如果调用时，函数作用域内部的变量x没有生成，结果就会不一样。
+	
+		
+	let x = 1;
+	
+	function f(y = x) {
+	let x = 2;
+	console.log(y);
+	}
+	
+	f() // 1
+
+如果参数的默认值是一个函数，该函数的作用域是其声明时所在的作用域。函数bar的参数func的默认值是一个匿名函数，返回值为变量foo。这个匿名函数声明时，bar函数的作用域还没有形成，所以匿名函数里面的foo指向外层作用域的foo，输出outer。
+
+	let foo = 'outer';
+	
+	function bar(func = x => foo) {
+	  let foo = 'inner';
+	  console.log(func()); // outer
+	}
+	
+	bar();
+
+匿名函数里面的foo指向函数外层，但是函数外层并没有声明foo
+
+	function bar(func = () => foo) {
+	  let foo = 'inner';
+	  console.log(func());
+	}
+	
+	bar() // ReferenceError: foo is not defined
+
+下面是一个更复杂的例子。
+
+	var x = 1;
+	function foo(x, y = function() { x = 2; }) {
+	  var x = 3;
+	  y();
+	  console.log(x);
+	}
+	
+	foo() // 3
+
+上面代码中，函数foo的参数y的默认值是一个匿名函数。函数foo调用时，它的参数x的值为undefined，所以y函数内部的x一开始是undefined，后来被重新赋值2。但是，函数foo内部重新声明了一个x，值为3，这两个x是不一样的，互相不产生影响，因此最后输出3。
+
+如果将var x = 3的var去除，两个x就是一样的，最后输出的就是2。
+
+	var x = 1;
+	function foo(x, y = function() { x = 2; }) {
+	  x = 3;
+	  y();
+	  console.log(x);
+	}
+	
+	foo() // 2
+
+**参数默认值的应用**  --》 利用参数默认值，可以指定某一个参数不得省略，如果省略就抛出一个错误。
+
+	function throwIfMissing() {
+	  throw new Error('Missing parameter');
+	}
+	
+	function foo(mustBeProvided = throwIfMissing()) {
+	  return mustBeProvided;
+	}
+	
+	foo()
+	// Error: Missing parameter
+
+上面代码的foo函数，如果调用的时候没有参数，就会调用默认值throwIfMissing函数，从而抛出一个错误。
+
+从上面代码还可以看到，参数mustBeProvided的默认值等于throwIfMissing函数的运行结果（即函数名之后有一对圆括号），这表明参数的默认值不是在定义时执行，而是在运行时执行（即如果参数已经赋值，默认值中的函数就不会运行），这与python语言不一样。
+
+另外，可以将参数默认值设为undefined，表明这个参数是可以省略的。
+function foo(optional = undefined) { ··· }
+
+**reset参数** --> 
+
+（形式为“...变量名”），用于获取函数的多余参数，这样就不需要使用arguments对象了。rest参数搭配的变量是一个数组，该变量将多余的参数放入数组中。函数的length属性，不包括rest参数。
+
+	function add(...values) {
+	  let sum = 0;
+	
+	  for (var val of values) {
+	    sum += val;
+	  }
+	
+	  return sum;
+	}
+	
+	add(2, 5, 3) // 10
+
+上面代码的add函数是一个求和函数，利用rest参数，可以向该函数传入任意数目的参数。
+
+	// arguments变量的写法
+	function sortNumbers() {
+	  return Array.prototype.slice.call(arguments).sort();
+	}
+	
+	// rest参数的写法
+	const sortNumbers = (...numbers) => numbers.sort();
+
+rest参数中的变量代表一个数组，所以数组特有的方法都可以用于这个变量。下面是一个利用rest参数改写数组push方法的例子。
+
+	function push(array, ...items) {
+	  items.forEach(function(item) {
+	    array.push(item);
+	    console.log(item);
+	  });
+	}
+	
+	var a = [];
+	push(a, 1, 2, 3)
+
+**注意**，rest参数之后不能再有其他参数（即只能是最后一个参数），否则会报错。
+
+	// 报错
+	function f(a, ...b, c) {
+	  // ...
+	}
+
+	(function(a) {}).length  // 1
+	(function(...a) {}).length  // 0
+	(function(a, ...b) {}).length  // 1
+
+
+**扩展运算符** --> （spread）是三个点（...）。它好比rest参数的逆运算，将一个数组转为用逗号分隔的参数序列。
+ 
+	console.log(...[1, 2, 3])
+	// 1 2 3
+	
+	console.log(1, ...[2, 3, 4], 5)
+	// 1 2 3 4 5
+	
+	[...document.querySelectorAll('div')]
+	// [<div>, <div>, <div>]
+
+该运算符主要用于函数调用
+
+	function push(array, ...items) {
+	  array.push(...items);
+	}
+	
+	function add(x, y) {
+	  return x + y;
+	}
+	
+	var numbers = [4, 38];
+	add(...numbers) // 42
+
+array.push(...items)和add(...numbers)这两行，都是函数的调用，它们的都使用了扩展运算符。该运算符将一个数组，变为参数序列。
+
+扩展运算符与正常的函数参数可以结合使用，非常灵活。
+
+	function f(v, w, x, y, z) { }
+	var args = [0, 1];
+	f(-1, ...args, 2, ...[3]);
+
+
+**替代数组的apply方法 ** -->由于扩展运算符可以展开数组，所以不再需要apply方法，将数组转为函数的参数了。
+	
+	// ES5的写法
+	function f(x, y, z) {
+	  // ...
+	}
+	var args = [0, 1, 2];
+	f.apply(null, args);
+	
+	// ES6的写法
+	function f(x, y, z) {
+	  // ...
+	}
+	var args = [0, 1, 2];
+	f(...args);
+
+扩展运算符取代apply方法的一个实际的例子，应用Math.max方法，简化求出一个数组最大元素的写法。
+
+	// ES5的写法
+	Math.max.apply(null, [14, 3, 77])
+	
+	// ES6的写法
+	Math.max(...[14, 3, 77])
+	
+	// 等同于
+	Math.max(14, 3, 77);
+
+上面代码表示，由于JavaScript不提供求数组最大元素的函数，所以只能套用Math.max函数，将数组转为一个参数序列，然后求最大值。有了扩展运算符以后，就可以直接用Math.max了。
+
+另一个例子是通过push函数，将一个数组添加到另一个数组的尾部。
+
+	// ES5的写法
+	var arr1 = [0, 1, 2];
+	var arr2 = [3, 4, 5];
+	Array.prototype.push.apply(arr1, arr2);
+	
+	// ES6的写法
+	var arr1 = [0, 1, 2];
+	var arr2 = [3, 4, 5];
+	arr1.push(...arr2);
+
+上面代码的ES5写法中，push方法的参数不能是数组，所以只好通过apply方法变通使用push方法。有了扩展运算符，就可以直接将数组传入push方法。
+
+**扩展运算符的应用**
+
+1. 扩展运算符提供了数组合并的新写法
+2. 与解构赋值结合--如果将扩展运算符用于数组赋值，只能放在参数的最后一位，否则会报错
+3. 函数的返回值--JavaScript的函数只能返回一个值，如果需要返回多个值，只能返回数组或对象。扩展运算符提供了解决这个问题的一种变通方法
+4. 字符串--扩展运算符还可以将字符串转为真正的数组。JavaScript会将32位Unicode字符，识别为2个字符，采用扩展运算符就没有这个问题
+
+	function length(str) {
+	  return [...str].length;
+	}
+
+5. 实现了Iterator接口的对象--任何Iterator接口的对象，都可以用扩展运算符转为真正的数组
+	 
+		var nodeList = document.querySelectorAll('div');
+		var array = [...nodeList];
+
+	上面代码中，querySelectorAll方法返回的是一个nodeList对象。它不是数组，而是一个类似数组的对象。这时，扩展运算符可以将其转为真正的数组，原因就在于NodeList对象实现了Iterator接口。
+
+6. Map和Set结构，Generator函数--扩展运算符内部调用的是数据结构的Iterator接口，因此只要具有Iterator接口的对象，都可以使用扩展运算符，比如Map结构
+
+		let map = new Map([
+		  [1, 'one'],
+		  [2, 'two'],
+		  [3, 'three'],
+		]);
+
+		let arr = [...map.keys()]; // [1, 2, 3]
+Generator函数运行后，返回一个遍历器对象，因此也可以使用扩展运算符。
+		
+		var go = function*(){
+		  yield 1;
+		  yield 2;
+		  yield 3;
+		};
+
+	[...go()] // [1, 2, 3]
+上面代码中，变量go是一个Generator函数，执行后返回的是一个遍历器对象，对这个遍历器对象执行扩展运算符，就会将内部遍历得到的值，转为一个数组。
+
+如果对没有iterator接口的对象，使用扩展运算符，将会报错。
+
+var obj = {a: 1, b: 2};
+let arr = [...obj]; // TypeError: Cannot spread non-iterable object
+
+
+
+**严格模式** 
+从ES5开始，函数内部可以设定为严格模式。
+
+	function doSomething(a, b) {
+	  'use strict';
+	  // code
+	}
+
+《ECMAScript 2016标准》做了一点修改，规定只要函数参数使用了默认值、解构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错。
+
+	
+	function doSomething(a, b = a) {  // 报错
+	  'use strict';
+	  // code
+	}
+	
+	const doSomething = function ({a, b}) {  // 报错
+	  'use strict';
+	  // code
+	};
+	
+	const doSomething = (...a) => {  // 报错
+	  'use strict';
+	  // code
+	};
+	
+	const obj = {
+	  doSomething({a, b}) {  // 报错
+	    'use strict';
+	    // code
+	  }
+	};
+
+这样规定的原因是，函数内部的严格模式，同时适用于函数体代码和函数参数代码。但是，函数执行的时候，先执行函数参数代码，然后再执行函数体代码。这样就有一个不合理的地方，只有从函数体代码之中，才能知道参数代码是否应该以严格模式执行，但是参数代码却应该先于函数体代码执行。
+
+	// 报错
+	function doSomething(value = 070) {
+	  'use strict';
+	  return value;
+	}
+上面代码中，参数value的默认值是八进制数070，但是严格模式下不能用前缀0表示八进制，所以应该报错。但是实际上，JavaScript引擎会先成功执行value = 070，然后进入函数体内部，发现需要用严格模式执行，这时才会报错。
+
+虽然可以先解析函数体代码，再执行参数代码，但是这样无疑就增加了复杂性。因此，标准索性禁止了这种用法，只要参数使用了默认值、解构赋值、或者扩展运算符，就不能显式指定严格模式。
+
+两种方法可以规避这种限制。第一种是设定全局性的严格模式，这是合法的。
+	
+	'use strict';
+	
+	function doSomething(a, b = a) {
+	  // code
+	}
+第二种是把函数包在一个无参数的立即执行函数里面。
+
+	const doSomething = (function () {
+	  'use strict';
+	  return function(value = 42) {
+	    return value;
+	  };
+	}());
+
+**name属性** --> 返回函数的名称 
+
+ES6对这个属性的行为做出了一些修改。如果将一个匿名函数赋值给一个变量，ES5的name属性，会返回空字符串，而ES6的name属性会返回实际的函数名。
+
+	var func1 = function () {};
+	
+	// ES5
+	func1.name // ""
+	
+	// ES6
+	func1.name // "func1"
+
+如果将一个具名函数赋值给一个变量，则ES5和ES6的name属性都返回这个具名函数原本的名字。
+
+	const bar = function baz() {};
+	
+	// ES5
+	bar.name // "baz"
+	
+	// ES6
+	bar.name // "baz"
+
+Function构造函数返回的函数实例，name属性的值为“anonymous”。
+
+	(new Function).name // "anonymous"
+
+bind返回的函数，name属性值会加上“bound ”前缀。
+
+	function foo() {};
+	foo.bind({}).name // "bound foo"
+	
+	(function(){}).bind({}).name // "bound "
+
+##箭头函数    !!!      -->   ES6允许使用“箭头”（=>）定义函数。 
+**"参数" => "返回值"**
+
+	var f = v => v;
+上面的箭头函数等同于：
+
+	var f = function(v) {
+	  return v;
+	};
+
+如果箭头函数不需要参数或需要多个参数，就使用一个圆括号代表参数部分。
+
+	var f = () => 5;
+	// 等同于
+	var f = function () { return 5 };
+	
+	var sum = (num1, num2) => num1 + num2;
+	// 等同于
+	var sum = function(num1, num2) {
+	  return num1 + num2;
+	};
+
+如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。
+
+	var sum = (num1, num2) => { return num1 + num2; }
+
+由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号。
+
+	var getTempItem = id => ({ id: id, name: "Temp" });
+
+箭头函数可以与变量解构结合使用。
+
+	const full = ({ first, last }) => first + ' ' + last;
+	
+	// 等同于
+	function full(person) {
+	  return person.first + ' ' + person.last;
+	}
+
+箭头函数使得表达更加简洁。
+
+	const isEven = n => n % 2 == 0;
+	const square = n => n * n;
+
+箭头函数的一个用处是简化回调函数。
+
+	// 正常函数写法
+	[1,2,3].map(function (x) {
+	  return x * x;
+	});
+	
+	// 箭头函数写法
+	[1,2,3].map(x => x * x);
+
+另一个例子是
+
+	// 正常函数写法
+	var result = values.sort(function (a, b) {
+	  return a - b;
+	});
+	
+	// 箭头函数写法
+	var result = values.sort((a, b) => a - b);
+
+下面是rest参数与箭头函数结合的例子。
+
+	const numbers = (...nums) => nums;
+	
+	numbers(1, 2, 3, 4, 5)
+	// [1,2,3,4,5]
+	
+	const headAndTail = (head, ...tail) => [head, tail];
+	
+	headAndTail(1, 2, 3, 4, 5)
+	// [1,[2,3,4,5]]
+
+**箭头函数使用注意事项**
+
+> 1.函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。 **this对象的指向是固定的**
+> 
+> 2.不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。
+> 
+> 3.不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用Rest参数代替。
+> 
+> 4.不可以使用yield命令，因此箭头函数不能用作Generator函数。
+
+
 		function Timer() {
 		  this.s1 = 0;
 		  this.s2 = 0;
@@ -767,4 +1316,5 @@ ES6内部使用严格相等运算符（===），判断一个位置是否有值�
 		// s1: 3
 		// s2: 0
 
-	上面代码中，Timer函数内部设置了两个定时器，分别使用了箭头函数和普通函数。前者的this绑定定义时所在的作用域（即Timer函数），后者的this指向运行时所在的作用域（即全局对象）。所以，3100毫秒之后，timer.s1被更新了3次，而timer.s2一次都没更新。
+
+上面代码中，Timer函数内部设置了两个定时器，分别使用了箭头函数和普通函数。前者的this绑定定义时所在的作用域（即Timer函数），后者的this指向运行时所在的作用域（即全局对象）。所以，3100毫秒之后，timer.s1被更新了3次，而timer.s2一次都没更新。

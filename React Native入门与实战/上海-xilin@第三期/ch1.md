@@ -1,4 +1,4 @@
-// 脑图链接 http://naotu.baidu.com/file/f7ce1918151315c09f60214cc14b351d?token=5161448d6e1fcf32
+> 脑图链接 http://naotu.baidu.com/file/f7ce1918151315c09f60214cc14b351d?token=5161448d6e1fcf32
 
 # Ch1. RN简介
 

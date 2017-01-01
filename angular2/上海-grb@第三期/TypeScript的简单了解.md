@@ -14,7 +14,7 @@
     )
 
 ###箭头函数的执行上下文(this)指向外层的代码
-    + 使用箭头函数
+    使用箭头函数
     function MyComponent(){
     	this.age=42;
     	setTimeout(

@@ -44,3 +44,33 @@ createTextNode()
 
 docu,ent.defaultView顶部对象捷径：
 console.log(document.defaultView)
+
+
+
+第三章 元素节点
+
+·createElement()
+·tagName
+·children
+·getAttribute()
+·setAttribute()
+·hasAttribute()
+·removeAttribute
+·classList()
+·dataset
+·attributes
+
+从创建元素开始，element节点是浏览器解析一份html文档为我们实例化的，基于该文档内容简历了一个对应的dom树，除此之外，还可以用createElement()方法以变成的方式创建Element的节点。
+
+
+这里我总结几个方法：
+tagName 获取元素的标签名
+attributes获取当前元素都Attr节点
+getAttribute() setAttribute() removeAttribute()获取、设置、移除元素
+
+验证一个元素是否有某属性：hassAttribute()
+添加与移除类属性中的部分值 classlist.add() 、classlist.remove()
+变换某个类属性值classList.toggle()
+判断类属性值是否含某一特定值classList.contains()
+获取与设置data-*属性   dataset
+

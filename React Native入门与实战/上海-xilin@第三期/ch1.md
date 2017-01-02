@@ -1,9 +1,11 @@
-## CH.1 RN简介
+> 脑图链接 http://naotu.baidu.com/file/f7ce1918151315c09f60214cc14b351d?token=5161448d6e1fcf32
 
-### 1. 环境搭建
+# Ch1. RN简介
+
+## 1. 环境搭建
 
 <!--Note-->
-##### 安装命令
+#### 安装命令
 
 ```
 // 指定node.js版本
@@ -17,21 +19,21 @@ npm i -g rninit
 rninit init Hello --source react-native@0.15.0
 ```
 
-##### 参考
+#### 参考
 *  [new-react-native-project-with-old-version-of-react-native](http://stackoverflow.com/questions/34211131/new-react-native-project-with-old-version-of-react-native)
 
 <!--/Note-->
 
-#### NVM
+### NVM
 
-#### Node.js
+### Node.js
 
-#### React Native
+### React Native
 
-#### Xcode编译
+### Xcode编译
 
 <!--Note-->
-###### 编译错误修正
+##### 编译错误修正
 * [RCTWebSocket compile error](https://github.com/facebook/react-native/issues/8584)
   - 删除编译选项
 
@@ -39,32 +41,35 @@ rninit init Hello --source react-native@0.15.0
   - 勾选`Run scripts only when installed`
 <!--/Note-->
 
-### 2. React
+## 2. React
 
-#### JSX
+### JSX
 
-##### React.render
+#### React.render
 
-##### React.createClass
+#### React.createClass
 
-###### getInitialState
+##### getInitialState
 
-###### componentDidMount
+##### componentDidMount
 
-###### componentWillUnmount
+##### componentWillUnmount
 
-###### render
+##### render
 
-###### this.state
+##### this.state
 
-###### this.setState
+##### this.setState
 
-###### this.refs
+##### this.refs
 
-#### ES6
+### ES6
 
-#### Virtual Dom
+### Virtual Dom
 
-### 3. React Native
+## 3. React Native
 
-#### var {} = React
+### var {} = React
+
+### 设计思路
+![RN设计思路](http://ww4.sinaimg.cn/large/6e8cb483gw1fb6xtackxvj20km0ea75u.jpg)

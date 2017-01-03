@@ -1318,3 +1318,180 @@ bind返回的函数，name属性值会加上“bound ”前缀。
 
 
 上面代码中，Timer函数内部设置了两个定时器，分别使用了箭头函数和普通函数。前者的this绑定定义时所在的作用域（即Timer函数），后者的this指向运行时所在的作用域（即全局对象）。所以，3100毫秒之后，timer.s1被更新了3次，而timer.s2一次都没更新。
+
+
+箭头函数转成ES5的代码如下。
+
+	// ES6
+	function foo() {
+	  setTimeout(() => {
+	    console.log('id:', this.id);
+	  }, 100);
+	}
+	
+	// ES5
+	function foo() {
+	  var _this = this;
+	
+	  setTimeout(function () {
+	    console.log('id:', _this.id);
+	  }, 100);
+	}
+
+除了this，以下三个变量在箭头函数之中也是不存在的，指向外层函数的对应变量：arguments、super、new.target。
+
+	function foo() {
+	  setTimeout(() => {
+	    console.log('args:', arguments);
+	  }, 100);
+	}
+	
+	foo(2, 4, 6, 8)
+	// args: [2, 4, 6, 8]
+
+上面代码中，箭头函数内部的变量arguments，其实是函数foo的arguments变量。
+
+另外，由于箭头函数没有自己的this，所以当然也就不能用call()、apply()、bind()这些方法去改变this的指向。
+
+		(function() {
+		  return [
+		    (() => this.x).bind({ x: 'inner' })()
+		  ];
+		}).call({ x: 'outer' });
+		// ['outer']
+
+上面代码中，箭头函数没有自己的this，所以bind方法无效，内部的this指向外部的this。
+
+**嵌套的箭头函数** --> 箭头函数内部，还可以再使用箭头函数
+
+	function insert(value) {
+	  return {into: function (array) {
+	    return {after: function (afterValue) {
+	      array.splice(array.indexOf(afterValue) + 1, 0, value);
+	      return array;
+	    }};
+	  }};
+	}
+	
+	insert(2).into([1, 3]).after(1); //[1, 2, 3]
+
+上面这个函数，可以使用箭头函数改写。
+
+	let insert = (value) => ({into: (array) => ({after: (afterValue) => {
+	  array.splice(array.indexOf(afterValue) + 1, 0, value);
+	  return array;
+	}})});
+	
+	insert(2).into([1, 3]).after(1); //[1, 2, 3]
+
+下面是一个部署**管道机制（pipeline）**的例子，即前一个函数的输出是后一个函数的输入。
+
+	const pipeline = (...funcs) =>
+	  val => funcs.reduce((a, b) => b(a), val);
+	
+	const plus1 = a => a + 1;
+	const mult2 = a => a * 2;
+	const addThenMult = pipeline(plus1, mult2);
+	
+	addThenMult(5)
+	// 12
+
+如果觉得上面的写法可读性比较差，也可以采用下面的写法。
+
+	const plus1 = a => a + 1;
+	const mult2 = a => a * 2;
+	
+	mult2(plus1(5))
+	// 12
+
+箭头函数还有一个功能，就是可以很方便地改写λ演算。
+
+	// λ演算的写法
+	fix = λf.(λx.f(λv.x(x)(v)))(λx.f(λv.x(x)(v)))
+	
+	// ES6的写法
+	var fix = f => (x => f(v => x(x)(v)))
+	               (x => f(v => x(x)(v)));
+
+
+**绑定 this** --> 
+> 箭头函数可以绑定this对象，大大减少了显式绑定this对象的写法（call、apply、bind）。但是，箭头函数并不适用于所有场合，所以ES7提出了“函数绑定”（function bind）运算符，用来取代call、apply、bind调用。虽然该语法还是ES7的一个提案，但是Babel转码器已经支持。
+
+> 函数绑定运算符是并排的两个双冒号（::），双冒号左边是一个对象，右边是一个函数。该运算符会自动将左边的对象，作为上下文环境（即this对象），绑定到右边的函数上面。
+
+	 foo::bar;
+	// 等同于
+	bar.bind(foo);
+	
+	foo::bar(...arguments);
+	// 等同于
+	bar.apply(foo, arguments);
+	
+	const hasOwnProperty = Object.prototype.hasOwnProperty;
+	function hasOwn(obj, key) {
+	  return obj::hasOwnProperty(key);
+	}
+
+如果双冒号左边为空，右边是一个对象的方法，则等于将该方法绑定在该对象上面。
+
+	var method = obj::obj.foo;
+	// 等同于
+	var method = ::obj.foo;
+	
+	let log = ::console.log;
+	// 等同于
+	var log = console.log.bind(console);
+
+由于双冒号运算符返回的还是原对象，因此可以采用链式写法。
+
+	// 例一
+	import { map, takeWhile, forEach } from "iterlib";
+	
+	getPlayers()
+	::map(x => x.character())
+	::takeWhile(x => x.strength > 100)
+	::forEach(x => console.log(x));
+	
+	// 例二
+	let { find, html } = jake;
+	
+	document.querySelectorAll("div.myClass")
+	::find("p")
+	::html("hahaha");
+
+**尾调用？** --> 
+尾调用（Tail Call）是函数式编程的一个重要概念，本身非常简单，一句话就能说清楚，就是指某个函数的最后一步是调用另一个函数。
+
+	function f(x){
+	  return g(x);
+	}
+
+函数调用会在内存形成一个“调用记录”，又称“调用帧”（call frame），保存调用位置和内部变量等信息。“尾调用优化”（Tail call optimization）-->只保留内层函数的调用帧.
+
+**尾递归**-->
+函数调用自身，称为递归。如果尾调用自身，就称为尾递归。
+
+	function factorial(n) { //递归
+	  if (n === 1) return 1;
+	  return n * factorial(n - 1);
+	}
+	
+	factorial(5) // 120
+
+	function factorial(n, total) {  //尾递归
+	  if (n === 1) return total;
+	  return factorial(n - 1, n * total);
+	}
+	
+	factorial(5, 1) // 120
+
+**递归函数的改写**
+尾递归的实现，往往需要改写递归函数，确保最后一步只调用自身。做到这一点的方法，就是把所有用到的内部变量改写成函数的参数。
+
+**柯里化（ currying）**--> 意思是将多参数的函数转换成单参数的形式。这里也可以使用柯里化。
+
+**严格模式**
+ES6的尾调用优化只在严格模式下开启，正常模式是无效的。
+
+**函数参数的尾逗号**
+如果以后修改代码，想为函数添加第n+1参数，就势必要在第n个参数后面添加一个逗号。这对版本管理系统来说，就会显示，添加逗号的那一行也发生了变动。这看上去有点冗余，因此新的语法允许定义和调用时，尾部直接有一个逗号。

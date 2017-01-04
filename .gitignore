@@ -1,1 +1,8 @@
+# OS X Finder
+.DS_Store
+
+# Automatic backup files
+*.swp
+*~
+
 /.idea

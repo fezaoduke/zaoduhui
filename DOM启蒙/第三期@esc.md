@@ -74,3 +74,19 @@ getAttribute() setAttribute() removeAttribute()获取、设置、移除元素
 判断类属性值是否含某一特定值classList.contains()
 获取与设置data-*属性   dataset
 
+第四章  元素节点选取
+
+选取特定元素节点
+querySelector()返回首个元素
+getElementById()返回指定的元素
+创建/选取一个元素节点列表
+querySelectorAll()
+getElementByTagName()
+getElementByClassName()
+选取所有的直属子元素节点
+.children
+选取与上下文有关的元素
+querySelector()、querSlelctorALL()、getElementsByTagName()、getElementByClassName()
+预定义的元素节点选取/列表
+all文档中所有元素  forms文档中所有<form>元素  images.HTML文档中<img>元素  script.HTML文档中所有<script>元素  links.文档中<a>元素 
+

@@ -20,3 +20,16 @@
 - 1.16 遍历 DOM 中的节点
 - 1.17 使用 contains() 与 compareDocumentPosition()验证节点在 DOM 树中的位置
 - 1.18 判断两个节点是否相同
+
+## 第2章 文档节点
+
+- 2.1 文档节点概览
+- 2.2 HTML 文档属性与方法（包括继承的）
+- 2.3 获取 HTML Document 通用信息（标题、链接、提及者、最后修改时间及兼容模式）
+- 2.4 文档子节点
+- 2.5 document 提供的 <!DOCTYPE>、<html lang="en">、<head>及 <body> 捷径
+- 2.6 使用 document.implementation.hasFeature() 探测 DOM 规范/特性
+- 2.7 获取文档中当前聚焦/激活节点的引用
+- 2.8 判断文档或者文档中任何节点得到焦点
+- 2.9 document.defaultView 是个到顶部/全局对象的捷径
+- 2.10 使用 ownerDocument 从某一元素取得文档的引用

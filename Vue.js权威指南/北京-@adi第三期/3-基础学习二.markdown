@@ -1,0 +1,80 @@
+#如何追踪变化
+>把一个JavaScript对象传给Vue实例来作为它的data 选项， Vue将遍历它的属性，用Object.defineProperty 将它们转为 getter/ setter 这是Es5特性，而IE8不支持
+>每个组件实例都有相应的watcher程序实例，它会在组件渲染的过程中把属性记录为依赖，之后当依赖项的setter 被调用时， 会通知 watcher 重新计算
+>Vue 不允许在已经创建的实例上动态添加新的根基响应式属性，然而它可以使用 Vue.set(object, key, value) 方法将响应属性添加到嵌套的对象上
+也可以使用 vm.$set(object, key , value) 
+>有时想已有对象上添加一些属性，例如Object.assign() 或 _.extend() 方法来添加属性，但是添加到对象的新属性不会触发更新。这种情况下可以创建爱你一个新的对象，让它包含原来对象的属性和新的属性。
+
+#钩子函数
+指令定义函数提供了几个钩子函数
+bind: 只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个在绑定时执行的初始化动作
+inserted: 被绑定元素插入父节点时调用（ 父节点存在即可调用，不比存在于document 中）
+update: 被绑定元素所在的模板更新时滴啊用，而不论绑定值是否变化。 通过比较更新前后绑定值，可以忽略不必要的模板更新。
+componentUpdated 被绑定元素所在模板完成一次更新周期时调用
+unbind 只调用一次，指令与元素解绑时调用
+
+#钩子函数的参数 包括 el , binding , vnode , oldVnode
+  el: 指令所绑定的元素，可以用来直接操作 DOM 。
+  binding: 一个对象，包含以下属性：
+      name: 指令名，不包括 v- 前缀。
+      value: 指令的绑定值， 例如： v-my-directive="1 + 1", value 的值是 2。
+      oldValue: 指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。
+      expression: 绑定值的字符串形式。 例如 v-my-directive="1 + 1" ， expression 的值是 "1 + 1"。
+      arg: 传给指令的参数。例如 v-my-directive:foo， arg 的值是 "foo"。
+      modifiers: 一个包含修饰符的对象。 例如： v-my-directive.foo.bar, 修饰符对象 modifiers 的值是 { foo: true, bar: true }。
+  vnode: Vue 编译生成的虚拟节点，查阅 VNode API 了解更多详情。
+  oldVnode: 上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。
+// 注册一个全局自定义指令 v-focus
+Vue.directive('focus', {
+  // 当绑定元素插入到 DOM 中。
+  inserted: function (el) {
+    // 聚焦元素
+    el.focus()
+  }
+})
+
+#函数简写
+大多数情况下，我们可能想在 bind 和 update 钩子上做重复动作，并且不想关心其它的钩子函数。可以这样写:
+Vue.directive('color-swatch', function (el, binding) {
+  el.style.backgroundColor = binding.value
+ })
+#重新梳理下Vue组件的生命周期
+	1. init 在实例开始初始化时同步调用
+	2. created 在实例创建之后同步调用，此时实例已经结束解析选项，这意味着已经建立：数据绑定、计算属性、方法、Watcher/事件回调，但还没有开始DOM编译，$el还不存在
+	3. beforeCompile 在编译开始之前
+	4. compile 编译结束后调用，此时所有的指令都已经生效，因而数据的变化将触发DOM的更新
+	5. ready 编译结束后和￥el第一次插入文档之后调用
+	6. attched vm.$el插入DOM时调用。必须是由指令或实例方法插入，直接操作vm.$el不会触发这个钩子
+	7. 在vm.$el从DOM中删除时调用，必须由指令或实例方法删除，直接操作vm.$el不会触发
+	8. beforeDestroy 在开始销毁实例时调用，此时实例仍然有功能
+	9. destroyed 实例销毁之后调用。
+
+#常见问题
+1. camelCase & kebab-case
+	HTML 标签中的属性名不区分大小写，设置prop名字为camelCase形式的时候需要转换为kebab-case形式
+2.字面量语法&动态语法
+	误区：使用过字面量预发传递数值
+	如果想传递一个真实的JavaScript类型的数字，则需要使用动态预发，从而让他的值被当做JavaScript表达式计算
+3.组件选项问题
+	传入Vue构造器的多数选项也可以用在Vue.extend()中，但data 和 ele 是例外，为了避免组件的所有实例都共享同一个data对象，因此应当使用函数作为data选项，让这个函数返回一个新对象。
+4.模板解析
+	Vue的模板是DOM模板，因此必须是有效的HTML片段，因此常见的限制有
+	a不能包含其他的交互元素（如按钮和链接）
+	ul 和 ol中只能直接包含li
+	select只能包含option 和 optgroup 
+	tr只能包含th 和 td
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

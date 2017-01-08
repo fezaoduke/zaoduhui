@@ -90,3 +90,20 @@ querySelector()、querSlelctorALL()、getElementsByTagName()、getElementByClass
 预定义的元素节点选取/列表
 all文档中所有元素  forms文档中所有<form>元素  images.HTML文档中<img>元素  script.HTML文档中所有<script>元素  links.文档中<a>元素 
 
+第五章 元素节点几何量与滚动几何量
+
+
+获取元素相对于offsetParent的offsetTop及offsetLeft值，他们以像素为单位.
+    <script>
+        var div = document.querySelector('#red');
+        console.log(div.offsetLeft);
+        console.log(div.offsetTop);
+        console.log(div.offsetParent);
+    </script>
+使用getBoundingClientRect()获取元素相对于视区的Top.Right.Bottom以及Left边沿偏移量
+获取元素在视区中的尺寸(边框+填充+内容)getBoundingClientRect()
+获取元素在视区中的尺寸(填充+内容)不含边框clientWidth clientHeight
+使用elementFromPoint()获取视区中某一特定点上最顶层元素
+使用scrollHeight及scrollWidth获取滚动元素的尺寸
+使用scrollTop及获取并设置从上、左边滚动的距离
+使用scrolllntoView()滚动元素到视区

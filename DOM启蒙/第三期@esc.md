@@ -90,8 +90,8 @@ querySelector()、querSlelctorALL()、getElementsByTagName()、getElementByClass
 预定义的元素节点选取/列表
 all文档中所有元素  forms文档中所有<form>元素  images.HTML文档中<img>元素  script.HTML文档中所有<script>元素  links.文档中<a>元素 
 
-第五章 元素节点几何量与滚动几何量
 
+第五章 元素节点几何量与滚动几何量
 
 获取元素相对于offsetParent的offsetTop及offsetLeft值，他们以像素为单位.
     <script>

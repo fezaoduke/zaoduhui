@@ -94,12 +94,6 @@ all文档中所有元素  forms文档中所有<form>元素  images.HTML文档中
 第五章 元素节点几何量与滚动几何量
 
 获取元素相对于offsetParent的offsetTop及offsetLeft值，他们以像素为单位.
-    <script>
-        var div = document.querySelector('#red');
-        console.log(div.offsetLeft);
-        console.log(div.offsetTop);
-        console.log(div.offsetParent);
-    </script>
 使用getBoundingClientRect()获取元素相对于视区的Top.Right.Bottom以及Left边沿偏移量
 获取元素在视区中的尺寸(边框+填充+内容)getBoundingClientRect()
 获取元素在视区中的尺寸(填充+内容)不含边框clientWidth clientHeight

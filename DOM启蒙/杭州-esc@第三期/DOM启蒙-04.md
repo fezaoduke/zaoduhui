@@ -1,13 +1,15 @@
 # 《Dom启蒙》读书笔记
 
-## 第5章 元素节点几何量与滚动几何量
+## 第7章 文本节点
 
-- 5.1 元素节点尺寸、偏移及滚动概览
-- 5.2 获取元素相对于 offsetParent 的 offsetTop 及 offsetLeft 值
-- 5.3 使用 getBoundingClientRect() 获取元素相对于视区的Top, Right, Bottom及Left边沿偏移量
-- 5.4 获取元素在视区中的尺寸（边框 + 填充 + 内容）
-- 5.5 获取元素在视区中的尺寸（填充 + 内容），不含边框
-- 5.6 使用 elementFromPoint() 获取视区中某一特定点上最顶层的元素
-- 5.7 使用 scrollHeight 及 scrollWidth 获取滚动元素的尺寸
-- 5.8 使用 scrollTop及scrollLeft 获取并设置从上、左边滚动的距离
-- 5.9 使用 scrollIntoView() 滚动元素到视区
+- 7.1 文本对象概览
+- 7.2 文本对象与属性
+- 7.3 空白符创建文本节点
+- 7.4 创建与注入文本节点
+- 7.5 使用 .data 或 nodeValue 获取文本节点值
+- 7.6 使用appendData()、deleteData()、insertData()、replaceData()及 subStringData() 操作文本节点
+- 7.7 当有多个兄弟文本节点时
+- 7.8 使用 textContent 移除文本标记并返回所有的子文本节点
+- 7.9 textContent 与 innerText 的区别
+- 7.10 使用 normalize() 合并兄弟文本节点成单个文本节点
+- 7.11 使用 splitText() 分割文本节点

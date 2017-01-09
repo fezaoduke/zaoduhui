@@ -1,0 +1,18 @@
+.wrapper {
+    margin: 20px auto;
+    width:600px;
+    height:400px;
+    background-color: #eeccff;
+    border: 1px soild #eee;
+}
+.boder_styl {
+  margin: 5px;
+  padding:20px;
+  box-sizing: border-box;
+  border: 1px solid #666;
+}
+.boder_styl p {
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+}

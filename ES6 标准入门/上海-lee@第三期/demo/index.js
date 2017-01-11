@@ -1,9 +1,9 @@
 
 const _rendPageContent = () => $(`
     <div class="lists">
-        <p>AAA<p>
-        <p>BBB<p>
-        <p>CCC<p>
+        <p>AAA</p>
+        <p>BBB</p>
+        <p>CCC</p>
     </div>
 `)
 class Wrap1 {

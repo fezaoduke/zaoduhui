@@ -9,7 +9,9 @@
 
 > 这次由于各种事情耽搁了好久才commit，但是一直也没忘记，并且对于早读汇也有了新的理解，希望自己能够不要像笔记里写的那样是纯“学习摘抄”，而是有自己的思考和总结，所以这次我先将整章内容看了一遍，再用导图将重点内容的结构和内容组织起来，用两遍加深自己对知识点的理解。
 
-这次更新主要内容为第三章：初始React，[http://naotu.baidu.com/file/1fe46de2bfd945cc4ae4494036449559?token=4c9e523c4e84874e] 有效期: 99999 分钟(好像不能永久分享，先这样吧)以及导出的“第三章 初识React.xmind文件”
+这次更新主要内容为第三章：初始React，~~[http://naotu.baidu.com/file/1fe46de2bfd945cc4ae4494036449559?token=4c9e523c4e84874e] 有效期: 99999 分钟(好像不能永久分享，先这样吧)~~以及导出的“第三章 初识React.xmind文件”
+
+永久链接：[http://naotu.baidu.com/file/1fe46de2bfd945cc4ae4494036449559?token=4c9e523c4e84874e](http://naotu.baidu.com/file/1fe46de2bfd945cc4ae4494036449559?token=4c9e523c4e84874e)
 
 ---- 
 ## 关于我

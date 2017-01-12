@@ -1,7 +1,9 @@
 # README
 2017-01-12：
 
-> 今晚commit第四章，脑图绘制中
+> ~~今晚commit第四章，脑图绘制中~~
+
+这次更新主要内容为第四章：实践React，[http://naotu.baidu.com/file/f5880a9455954a85a241e72bcb2159e5?token=4fdf33df9183f4b7](http://naotu.baidu.com/file/f5880a9455954a85a241e72bcb2159e5?token=4fdf33df9183f4b7)以及导出的“第四章 实践React.xmind”
 
 2017-01-09：
 

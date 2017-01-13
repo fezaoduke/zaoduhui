@@ -1,4 +1,9 @@
 # README
+
+2017-01-13:
+
+已经我的梳理汇总文章：[实践中如何使用React？](http://mp.weixin.qq.com/s?__biz=MzI0MzAwOTAyNA==&mid=2652136291&idx=1&sn=b50689695418c8be9a2d862d5f5914a2&chksm=f293500cc5e4d91aee63bad05a33601c4a7f9c31a08a1131fb7f5f39634b09c81ef457b2c050&mpshare=1&scene=23&srcid=0113QcP6H6XjeseI7VQI1Qq9#rd)，欢迎大家关注我的公众号。
+
 2017-01-12：
 
 > ~~今晚commit第四章，脑图绘制中~~

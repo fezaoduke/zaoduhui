@@ -37,7 +37,7 @@ const filterSelectData = (data, initIndex) => {
 }
 
 data = filterSelectData(data, 1)
-console.log(data)
+//console.log(data)
 var _renderLi = function (listData) {
     return listData.map(function (li) {
          return ("\n  <li class=\"select__li\" data-id=\"" + (li.id) + "\">" + (li.text) + "</li>\n");
@@ -65,7 +65,7 @@ const _renderClassUl3 = (data) => $(`
 `)
 
 class Wrap3 {
-    constructor() { 
+    constructor() {
         this._bindDom(data)
     }
 

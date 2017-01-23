@@ -1,3 +1,4 @@
+
 body{
     background-color: #3ac8ae;
     color: #fff;
@@ -9,7 +10,7 @@ body{
 }
 .boder_styl {
   margin: 5px;
-  padding:20px;
+  padding: 20px;
   box-sizing: border-box;
   border: 1px solid #f7f7f7;
 }

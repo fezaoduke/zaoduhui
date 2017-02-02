@@ -121,3 +121,51 @@ var subscription = NativeAppEventEmitter.addListener('EventReminder',
 当导出成第三方库给外部使用时，可以封装一层js wrapper方便别人使用。
 
 ## 3. 构件Native UI组件
+
+RN提供了许多基础组件的封装，如Navigator/MapView/DatePickerIOS/ScrollView等。它也提供了便捷的方式，将原生组件抽象成ReactJS中的组件对象供JS端调用，可以复用大量已存在的native控件。
+
+### 概述
+
+扩展的Native UI组件也是一个Native模块。相对API组件来说，UI组件还需要抽象出供React使用的标签，提供标签属性，响应用户行为等。
+
+- 使用`reactTag`标识组件
+- 在js中通过调用`RCTUIManager`模块的方法来映射UI更新
+- 所有UI更新操作统一缓存到一个UIBlocks中在通信完毕时由主线程统一更新
+- 通信频率为帧级别
+
+### UI组件的定义
+
+构建UI组件，需要创建一个继承`RCTViewManager`类的UI管理类。再实现`- (UIView *)view`接口，返回Native UI实例。
+
+因为UI组件的样式都由js控制，所以在`- (UIView *)view`方法中实例化时，任何对样式的操作都会被覆盖。一般在实例化时都不对view的frame进行设置。若组件内部不支持自适应，则需要在`- (void)layoutSubviews`方法中进行自适应布局。
+
+沿用系统的命名规范，UI模块应以`Manager`为后缀。在React中使用时过滤类后缀Manager直接用`requireNativeComponent('RCTMap', null)`这样的方式引用。
+
+### UI组件属性
+
+- 使用`RCT_EXPORT_VIEW_PROPERTY`来桥接UI属性
+  * `RCT_EXPORT_VIEW_PROPERTY(pitchEnabled, BOOL)`
+  * 对应的JS中使用为`<RCTMap pitchEnabled={false} />`
+- 若需重命名，可以使用`RCT_REMAP_VIEW_PROPERTY`
+- `RCTViewManager`对UIView的一些默认属性提供了封装
+- 支持标准JSON对象的自动转换，也可以用`RCT_CUSTOM_VIEW_PROPERTY`来完成自定义类型属性的扩展
+
+### 组件方法
+
+- Native UI组件的方法定义必须包含js传递的`reactTag`，实现逻辑需要封装在`RCTUIManager`的`addUIBlock`接口中，使用传入的`viewRegistry`通过tag查找实例
+- js中需要为组件设置ref，在调用方法时通过`React.findNodeHandle(ref)`传入tag
+
+### 事件
+
+- 先在native端绑定事件响应方法
+- 在响应方法中通过`RCTEventDispatcher`的`sendInputEventWithName`方法发送事件给js
+- `RCTViewManager`默认定义了一些事件与js标签中的`onEventName`进行关联
+- 要绑定自定义事件时，需要重写`- (NSArray *)customBubblingEventTypes`接口来实现
+
+### 实例
+
+代码[见此](https://github.com/vczero/React-Native-Code/tree/0ada236b9580490d9fac11ca468459dbc9bfb664/%E7%AC%AC5%E7%AB%A0/react-native-xypiechart)。
+
+功能是封装一个开源的`PieChart`组件。
+
+若设置Manager类为view的DataSource，没有特别好的文案在视图释放时手动释放缓存数据。可以通过扩展为view本身添加一个data属性，由控件本身来实现数据源。

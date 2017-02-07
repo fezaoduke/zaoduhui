@@ -1,0 +1,94 @@
+{
+    "extends": "eslint:recommended",
+    "env": {
+        "browser": true,
+        "es6": true,
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,      # es6
+        "sourceType": "module" # ECMAScript modules
+    },
+    "globals": {
+        "_ENV_": true,
+        "$": true,     # JQ
+    },
+    # 0:忽略 1:warn 2:error
+    "rules": {
+        # 模式 ---------------------------------------------------------------------------------
+        "strict": 1,                      # 得使用严格模式(rollup 编译自动使用严格模式)
+        # 可能会导致错误的 ---------------------------------------------------------------------------------
+        "no-constant-condition": 0,       # 判断语句中不能为固定的判断条件
+        # "no-console": 2,                  # 这三个不能用于生产环境，记得要删干净
+        # "no-alert": 2,                    # 这三个不能用于生产环境，记得要删干净
+        "no-debugger": 2,                 # 这三个不能用于生产环境，记得要删干净
+        "no-dupe-args": 2,                # 不允许定义多余的参数（每个参数都得使用到）
+        "no-dupe-keys": 2,                # 对象中不允许有相同的key
+        "no-duplicate-case": 2,           # switch 中 不能有相同条件的 case
+        "no-empty": 2,                    # 不允许有空语句块
+        "no-func-assign": 2,              # 函数不允许重分配
+        "no-template-curly-in-string": 1, # 引号内不能用模板字符串语法
+        "no-unexpected-multiline": 2,     # 防止 unexpected 错误（通常由分号引起，如行首有 （） 时）
+        "no-unreachable": 1,              # 避免函数中有永远执行不到的地方
+        "no-unsafe-negation": 2,          # 避免一些不安全的语法 if (!key in object) => if (!(key in object))
+        "use-isnan": 2,                   # 不用 foo == NaN， 用 isNaN(foo)
+        "valid-jsdoc": 1,                 # 检查 jsdoc 格式是否合法
+        "valid-typeof": 2,                # 避免错误的 typeof
+        # 最佳实践 ---------------------------------------------------------------------------------
+        "accessor-pairs": 1,              # 对象中定义了 set,就得定义 get
+        "array-callback-return": 1,       # 数组相关高阶函数得有返回值
+        # "class-methods-use-this": 1,      # 类实例方法中得用this，否则用静态方法
+        "eqeqeq": 1,                      # 始终用 ===
+        "no-else-return": 1,              # 判断中 if 有 return 值，else 也得有
+        "no-eval": 1,                     # 不用 eval
+        "no-fallthrough": 1,              # switch case 得有终止条件
+        "no-floating-decimal": 1,         # 浮点数得写完整 .6 => 0.6
+        "no-implied-eval": 1,             # 不用字符串解析代码如 setTimeout("alert('Hi!');", 100)
+        # "no-invalid-this": 1,             # 避免非法指定 this
+        "no-lone-blocks": 1,              # 不单独使用 {} 语句块
+        "no-loop-func": 1,                # 循环中不允许定义函数
+        "no-octal": 1,                    # 不使用八进制
+        "no-param-reassign": 1,           # 不允许函数参数重分配，要分配可用新变量复制参数
+        "no-redeclare": 1,                # 不重复声明
+        "no-return-assign": 1,            # return 中不使用赋值操作
+        "no-self-compare": 1,             # 不进行自我比较
+        "no-unused-labels": 1,            # 不使用 label 语句
+        "no-useless-call": 1,             # 不用无效的 call,apply(绑定无用的作用域)
+        "no-useless-concat": 1,           # 不做无效的字符串合并
+        "no-useless-return": 1,           # return 必须有值，不为 undefined
+        "no-void": 1,                     # 不用无效量
+        "no-with": 1,                     # 不使用 with
+        "radix": 1,                       # 避免非法 praseInt
+        # 变量相关 ---------------------------------------------------------------------------------
+        "no-unused-vars": 1,              # 声明的变量都得用到
+        "no-use-before-define": 1,        # 不允许使用在声明前(先声明，再使用)
+        # 编程风格 ---------------------------------------------------------------------------------
+        "block-spacing": [1, "always"],   # function foo() { return true; } => 单行 {} 内部前后都有空格或都无空格
+        "comma-dangle": [1, "never"],     # 不加多余逗号 [1,2,]
+        "comma-spacing": [1, { "before": false, "after": true }], # 逗号前无空格
+        "consistent-this": [1, "me"],     # 只用 me 来缓存 this，且 me 只能用来缓存 this
+        "func-call-spacing": [1, "never"], # fn() ()前无空格
+        "indent": [1, 4],                 # 缩进为4空格
+        "key-spacing": [1, { "beforeColon": false }], # 对象冒号前无空格
+        "keyword-spacing": [1, { "after": true }], # 关键字后须有空格
+        "max-depth": [1, { "max": 4 }],   # 逻辑嵌套不能大于四层
+        "max-len": [1, 190],               # 一行代码不长于 90
+        "max-nested-callbacks": [1, { "max": 4 }], # 最多四层回调
+        "max-params": [1, { "max": 5 }],  # 最多5个参数
+        "new-cap": [1, { "newIsCap": true }], # new 后为 首字母大写的类
+        "newline-after-var": [1, "always"], # 变量声明后需空一行
+        "no-mixed-spaces-and-tabs": 1,    # 不混用 tab 和 空格
+        "no-whitespace-before-property": 1, # a.xx 属性前无空格 => 不可 a .xx
+        "quote-props": [1, "as-needed"],  # 对象 key 除不合法变量名外都不需用 引号
+        "quotes": [1, "single"],          # 外引号不用双引号
+        # es6 ---------------------------------------------------------------------------------
+        "arrow-spacing": 1,               # => 前后有空格
+        "constructor-super": 1,           # class 继承一个有效类时，得调用 super()
+        "no-class-assign": 1,             # class 不能重分配
+        "no-const-assign": 2,             # const 常量 const 不能修改
+        "no-dupe-class-members": 1,       # class 中不能有重复的成员
+        "no-duplicate-imports": 1,        # 不能重复导入
+        "no-var": 1,                      # 不使用 var
+        "object-shorthand": 1,            # 对象中 key=>value名相等，及函数用简写
+        "prefer-const": 1,                # 从未修改过的let变量，建议用const
+    }
+}

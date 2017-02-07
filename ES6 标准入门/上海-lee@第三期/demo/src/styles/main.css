@@ -1,0 +1,40 @@
+
+body{
+    background-color: #3ac8ae;
+    color: #fff;
+}
+.wrapper {
+    margin-left: 120px;
+    width: 600px;
+    border: 1px soild #eee;
+}
+.boder_styl {
+  margin: 5px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #f7f7f7;
+}
+.boder_styl p {
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+}
+.person-info-output {
+    width: 100%;
+    border-top: 1px dashed #eee;
+    color: rgba(101, 67, 129, 0.56);
+}
+.person-info-output em {
+    display: inline-block;;
+    width: 36px;
+    line-height: 40px;
+    color: #ddd;
+}
+.person-info-output dl dt{
+    font-size: 16px;
+    line-height: 20px;
+}
+.person-info-output dl dd{
+    font-size: 12px;
+    line-height: 20px;
+}

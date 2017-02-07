@@ -2,19 +2,19 @@ import { Wrap21 } from './index_2_1'
 
 //数组成员为对象
 const data = [
-            {
-                id: 345,
-                name: '数组成员是对象'
-            },
-            {
-                id: 111,
-                name: '这是一个对象'
-            },
-            {
-                id: 550,
-                name: '哈哈哈'
-            }
-        ]
+    {
+        id: 345,
+        name: '数组成员是对象'
+    },
+    {
+        id: 111,
+        name: '这是一个对象'
+    },
+    {
+        id: 550,
+        name: '哈哈哈'
+    }
+]
 
 const _renderClassLi = data => data.map((item) =>
     `
@@ -29,7 +29,7 @@ const _renderClassUl = (data) =>
     </ul>
 `
 
-class Wrap2 {
+export class Wrap2 {
     constructor() {
         this._bindDom()
     }
@@ -42,8 +42,8 @@ class Wrap2 {
         this.$wrap = _renderClassUl(data)
         $('.wrap_2').append(this.$wrap)
 
-        // this.$DataFor = new Wrap21().dom();
-        // this.$wrap.append(this.$DataFor)
+        this.$DataFor = new Wrap21().dom();
+        $('.wrap_2').append(this.$DataFor)
     }
 
 

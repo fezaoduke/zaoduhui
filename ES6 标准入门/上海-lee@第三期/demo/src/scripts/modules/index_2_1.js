@@ -1,42 +1,44 @@
 
 //数组成员为对象
 const person = {
-                name: 'lee',
-                age: 16,
-                address: '上海',
-                hobby: '哈哈哈'
-            }
+    name: 'lee',
+    age: 16,
+    address: '上海',
+    hobby: '哈哈哈'
+}
 
 const _renderEm = data => {
-  const arr = []
+    const arr = []
 
-  for (const i in data)
-      arr.push(data[i])
-//  return arr.map(item => `<dt>${item.key}</dt><dd>${item.val}</dd>`).join('')
-  return arr.map(item => `<em>${item}</em>`).join('')
+    for (const i in data)
+        arr.push(data[i])
+        //  return arr.map(item => `<dt>${item.key}</dt><dd>${item.val}</dd>`).join('')
+    return arr.map(item => `<dd>${item}</dd>`).join('')
 }
 
 const _renderDiv = (data) =>
 `
-    <h4>person对象 for&in输出,export与import使用</h4>
-    <dl class="class_ul_1">
-        ${_renderEm(data)}
-    </dl>
+    <div class="person-info-output">
+        <h4>person对象 for&in输出,export与import使用</h4>
+        <dl class="class_ul_1">
+            <dt>person info<dt>
+            ${_renderEm(data)}
+        </dl>
+    </div>
 `
 
 export class Wrap21 {
     constructor() {
-       this._bindDom()
+        this._bindDom()
     }
 
     dom(){
-        console.log(111)
         return this.$wrap
     }
 
     _bindDom(){
         this.$wrap = _renderDiv(person)
-        $('.wrap_2').append(  this.$wrap )
+    //    $('.wrap_2').append( this.$wrap )
     }
 
     // createFor(){

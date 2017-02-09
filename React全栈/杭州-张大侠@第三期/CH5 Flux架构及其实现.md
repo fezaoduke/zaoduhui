@@ -10,6 +10,7 @@ MVC这种软件架构，数据流动是双向的。controller是model和view之�
 
 Flux整个流程：
 `Action`→`Dispatcher`→`Store`→`View`
+可以参见“demo-flux”，将一些笔记加到了注释中，便于理解
 - `Action`就是用来描述一个行为的对象，里面有相关的信息，比如一个创建文章的Action可以是：
 		{
 			actionName: 'create-post',

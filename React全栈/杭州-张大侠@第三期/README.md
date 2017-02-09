@@ -13,7 +13,7 @@ Flux及Redux等学习还不是很深入，继续补充中
 
 - 2017-01-13:
 
-已经我的梳理汇总文章：[实践中如何使用React？][1]，欢迎大家关注我的公众号。![][image-1]
+已经我的梳理汇总文章：[实践中如何使用React？][1]，欢迎大家关注我的公众号。![](https://github.com/fezaoduke/zaoduhui/blob/master/React%E5%85%A8%E6%A0%88/%E6%9D%AD%E5%B7%9E-%E5%BC%A0%E5%A4%A7%E4%BE%A0@%E7%AC%AC%E4%B8%89%E6%9C%9F/QR.jpg?raw=true)
 
 - 2017-01-12：
 
@@ -37,7 +37,7 @@ Flux及Redux等学习还不是很深入，继续补充中
 - `WeChat` imjustng
 - `Site` http://zdx.link
 - `个人公众号` zdx-it //除博客外的一个属于我个人的网上站点，平时会发点干货，欢迎关注。
-![][image-2]
+![](https://github.com/fezaoduke/zaoduhui/blob/master/React%E5%85%A8%E6%A0%88/%E6%9D%AD%E5%B7%9E-%E5%BC%A0%E5%A4%A7%E4%BE%A0@%E7%AC%AC%E4%B8%89%E6%9C%9F/QR.jpg?raw=true)
 
 ## 关于目录和计划
 #### 1、现代前端开发

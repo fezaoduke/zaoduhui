@@ -4,7 +4,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 
 const TodoAction = {
   create(todo) {
-    AppDispatcher.dispatch(//交给Dispatcher
+    AppDispatcher.dispatch(//Dispatcher的一个API方法dispatch()，交给Dispatcher。这个方法触发对应事件类型的回调
     	
 	    //Action本质是一个普通的JavaScript Object
 	    {	

@@ -3,36 +3,44 @@
 //TodoStore存放了所有的文章列表
 //不同类型的数据应该创建多个store，如程序中还存在用户信息，那么还可以新建一个UserStore.js
 
+//Store是更新数据的唯一场所，这是Flux的重要概念
+//action和Dispatcher并不和数据打交道，无法做数据操作
+
 import EventEmitter from 'events';
 import assign from 'object-assign';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import uuid from 'uuid';
 
 //单件类型的一个JavaScript Object
-const TodoStore = assign({}, EventEmitter.prototype, {
-    //存放所有文章的列表，里面有两条默认的数据
-    todos: [{ id: uuid.v4(), content: 'first one' }, { id: uuid.v4(), content: '2nd one' }],
-    getAll() {
-        return this.todos;
-    },
-    addTodo(todo) {
-        this.todos.push(todo);
-    },
-    deleteTodo(id) {
-        this.todos = this.todos.filter(item => item.id !== id);
-    },
-    emitChange() {
-        this.emit('change');
-    },
-    addChangeListener(callback) {
-        this.on('change', callback);
-    },
-    removeChangeListener(callback) {
-        this.removeListener('change', callback);
+const TodoStore = assign(
+    {},
+    EventEmitter.prototype,
+    {
+        //存放所有文章的列表，里面有两条默认的数据
+        todos: [{ id: uuid.v4(), content: 'first one' }, { id: uuid.v4(), content: '2nd one' }],
+        getAll() {
+            return this.todos;
+        },
+        addTodo(todo) {
+            this.todos.push(todo);
+        },
+        deleteTodo(id) {
+            this.todos = this.todos.filter(item => item.id !== id);
+        },
+        emitChange() {
+            this.emit('change');
+        },
+        addChangeListener(callback) {
+            this.on('change', callback);
+        },
+        removeChangeListener(callback) {
+            this.removeListener('change', callback);
+        }
     }
-});
+    );
 
-AppDispatcher.register((action) => {
+//Dispatcher的一个API方法，register，可以注册不同事件（对应actionType）的处理回调，并且在回调中对store进行处理
+AppDispatcher.register((action) => {    //每个action对应dispatch传过来的action，包含actionType和对应的数据，参见../actions/TodoAction.js
     switch (action.actionType) {
         case 'CREATE_TODO':
             TodoStore.addTodo(action.todo);

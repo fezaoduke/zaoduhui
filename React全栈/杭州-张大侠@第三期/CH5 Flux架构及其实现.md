@@ -34,8 +34,51 @@ Redux让state的变化可以预测。
 
 **三大定律**
 - 单一数据源
+整个应用的state存储在一个JavaScript对象中，Redux用一个称为store的对象来存储整个state。例如：
+、、、
+{
+	posts:{
+		isLoading: false,
+		items:[
+			{id:1, content:'Hello world'}
+		]
+	},
+	user:{
+		isLoading: false,
+		userInfo: {
+			name: 'zelda',
+			email: 'ze.zh@hotmail.com'
+		}
+	}
+}
+、、、
 - state只读
+不能再state上面直接修改数据，改变state的唯一办法是触发action。确保其他操作无法修改state数据，整个修改都被集中处理，而且严格按顺序执行。
+action只是一个信息载体，一个普通的JavaScript对象。
+、、、
+//使用dispatch触发store的改变
+store.dispatch({
+	type: 'CREATE_POST',
+	post: {id: 2, content: 'hello, zelda!'}
+});
+
+//使用getState方法返回当前的state
+store.getState();
+、、、
 - 使用纯函数进行修改
+为了描述action怎样改变state，需要编写**reducer**来规定修改的规则。
+reducer是一个纯函数（好处是无副作用，仅仅依赖函数的输入，输入确定时输出也一定保持一致），接收先前的state和处理的action，返回新的state。reducer可以根据应用的大小拆分成多个，分别操纵state的不同部分
+、、、
+//这就是一个reducer，负责处理action，返回新的state
+function posts(state = [], action){
+	switch(action.type){
+		case 'CREATE_POST': 
+			return [...state, action.post]
+		default:
+			return state;
+	}
+}
+、、、
 
 **组成**
 - action

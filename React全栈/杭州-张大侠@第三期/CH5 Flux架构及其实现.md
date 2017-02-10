@@ -81,10 +81,39 @@ function posts(state = [], action){
 			return state;
 	}
 }
-、、、
+```
 
 **组成**
 - action
+
+action是信息的载体，里面有action的名称和要传递的信息，然后可以被传递到store中去。
+传递的方法是利用store的dispatch方法，action是store的唯一信息来源。
+
+**action creator**是一个函数，用来创建不同的action，返回的还是一个对象。但在异步应用中有作用。
 - reducer
+
+action定义了要执行的操作，但是没有规定state怎样变化。reducer的任务就是定义整个程序的state如何响应。
+在Redux中，整个程序的所有数据存储在**唯一**一个Object中。
+reducer只是一个纯函数，接受两个参数，输入之前的state和action对象，返回新的state
 - store
+action不过是一个特殊的Object，它描述了一个特定的行为；
+reducer就是一个函数，接收数据和action，返回唯一的值，它会根据这些不同的action更新对应的state值
+store就是这两者的黏合剂，能够：
+	- 保存整个程序的state
+	- 可以通过getState()方法访问state的值
+	- 可以通过dispatch()方法执行一个action
+	- 还可以通过subscribe(listener)注册回调，监听state的变化。
+
+**数据流**
+总结Redux数据流分为这样几步：
+- 调用store.dispatch(action)，来执行一个action
+- store调用传入的reducer函数，store的来源就是reducer，const store=createState(rootReducer)。当前的state和action会传入到reducer这个函数中。
+- reducer处理action并且返回新的state。在reducer这个纯函数中，可以根据传入的action，来生成新的state并且返回。
+- store保存reducer返回的完整state。可以根据store.getState()来取得当前的state，也可以通过store.subscribe(listener)来监听state的变化。
+
+**使用middleware**
+中间件，在action被dispatch时触发，并提供了调用最终reducer之前的扩展能力。
+middleware可以同时接触到action信息与store的getState、dispatch方法。
+middleware可以在原有action的基础上创建一个新的action和dispatch（action装换，用于可异步action处理等），也可以触发一些额外的行为（如日志记录）。最后还可以通过next触发后续的middleware与reducer本身的执行。
+>curry化的本质是在调用函数的时候传入更少的参数，而这个函数会返回另外一个函数并且汉能继续接收其他的参数。
 

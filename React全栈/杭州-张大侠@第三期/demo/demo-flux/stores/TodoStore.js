@@ -12,9 +12,9 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import uuid from 'uuid';
 
 //单件类型的一个JavaScript Object
-const TodoStore = assign(
+const TodoStore = assign(   //使用assign方法把EventEmitter.prototype挂在到TodoStore上
     {},
-    EventEmitter.prototype,
+    EventEmitter.prototype, //借助Node.js标准库EventEmitter实现"store发生变化时，通知view并展示新数据"
     {
         //存放所有文章的列表，里面有两条默认的数据
         todos: [{ id: uuid.v4(), content: 'first one' }, { id: uuid.v4(), content: '2nd one' }],
@@ -28,6 +28,7 @@ const TodoStore = assign(
             this.todos = this.todos.filter(item => item.id !== id);
         },
         emitChange() {
+            //store的变化使用emit方法广播出去---》view层会接收这个信号，同时更新UI
             this.emit('change');
         },
         addChangeListener(callback) {

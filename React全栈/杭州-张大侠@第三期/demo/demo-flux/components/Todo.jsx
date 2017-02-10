@@ -13,6 +13,8 @@ class Todo extends React.Component {
     };
     this.createTodo = this.createTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
+
+    //组件初始化完成便监听store的change事件，这样在store触发这个事件的时候，就会触发回调
     this.onChange = this.onChange.bind(this);
   }
   componentDidMount() {

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>childOrder</key>
+	<array>
+		<string>新建文件夹</string>
+		<string>demo</string>
+		<string>img</string>
+	</array>
+	<key>resolutionData</key>
+	<dict>
+		<key>childOrder</key>
+		<dict>
+			<key>demo</key>
+			<dict>
+				<key>lastModification</key>
+				<real>509461057.12837601</real>
+				<key>version</key>
+				<dict>
+					<key>dc16c9d409ec1540793e253fd695ff1d8a4c2e3272941a0f46b00aaa937a0220</key>
+					<integer>2</integer>
+				</dict>
+			</dict>
+			<key>img</key>
+			<dict>
+				<key>lastModification</key>
+				<real>509461057.12837899</real>
+				<key>version</key>
+				<dict>
+					<key>dc16c9d409ec1540793e253fd695ff1d8a4c2e3272941a0f46b00aaa937a0220</key>
+					<integer>2</integer>
+				</dict>
+			</dict>
+			<key>新建文件夹</key>
+			<dict>
+				<key>explicitUnassignment</key>
+				<true/>
+				<key>firstUnassignment</key>
+				<real>509461066.63301098</real>
+				<key>lastModification</key>
+				<real>509461066.63301098</real>
+				<key>version</key>
+				<dict>
+					<key>dc16c9d409ec1540793e253fd695ff1d8a4c2e3272941a0f46b00aaa937a0220</key>
+					<integer>3</integer>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+	<key>storeFormatVersion</key>
+	<integer>1</integer>
+	<key>versioning</key>
+	<dict>
+		<key>childOrder</key>
+		<dict>
+			<key>dc16c9d409ec1540793e253fd695ff1d8a4c2e3272941a0f46b00aaa937a0220</key>
+			<integer>3</integer>
+		</dict>
+	</dict>
+</dict>
+</plist>

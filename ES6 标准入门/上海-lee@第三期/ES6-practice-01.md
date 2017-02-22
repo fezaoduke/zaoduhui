@@ -59,33 +59,33 @@ ES6模块的设计思想，是尽量的静态化，使得编译时就能确定�
 1.  阻止内层变量可能会覆盖外层变量的情况出现;
 2.  防止用来计数的循环变量泄露为全局变量；
 3.  let实际上为JavaScript新增了块级作用域。
-4.  let声明的变量只在它所在的代码块有效,ex:for(let i=0;i<9;i++){};且在改代码块内不允许重复生声明同一个变量，不论生命方式为"let"或"var"
+4.  let声明的变量只在它所在的代码块有效,ex:for(let i=0;i<9;i++){};且在改代码块内不允许  重复生声明同一个变量，不论生命方式为"let"或"var"
 5.   let不存在变量提升，用let声明的变量，仅在当前区块内有效，从一开始就形成了封闭作用域，变量一定要在声明后使用。 如果声明在使用之后，则会"ReferenceError"
-6.   let存在暂时性死区（temporal dead zone，简称TDZ）-->在代码块内，使用let命令声明变量之前，该变量都是不可用的,若此时对该变量使用typeof，则会报" ReferenceError"
+6.   let存在暂时性死区（temporal dead zone，简称TDZ）-->在代码块内，使用let命令声明变量之前，该变量都是不可用的,若此时对该变量使用typeof，则会报" ReferenceError(引用错误)"
 7.    let不允许在相同作用域内，重复声明同一个变量。
 
 
 
 		if (true) {
-		// TDZ开始
-		tmp = 'abc'; // ReferenceError
-		console.log(tmp); // ReferenceError
-
-		let tmp; // TDZ结束
-		console.log(tmp); // undefined
-
-		tmp = 123;
-		console.log(tmp); // 123
+			// TDZ开始
+			tmp = 'abc'; // ReferenceError
+			console.log(tmp); // ReferenceError
+	
+			let tmp; // TDZ结束
+			console.log(tmp); // undefined
+	
+			tmp = 123;
+			console.log(tmp); // 123
 		}
 
 		{{{{
-		{let insane = 'Hello World'}
-		console.log(insane); // 报错 not defined
+			{let insane = 'Hello World'}
+			console.log(insane); // 报错 not defined
 		}}}};  
 
 		{{{{
-		let insane = 'Hello World';
-		{let insane = 'Hello World'}
+			let insane = 'Hello World';
+			{let insane = 'Hello World'}
 		}}}};  //两个块内，正确
 
 
@@ -147,19 +147,19 @@ ES6模块的设计思想，是尽量的静态化，使得编译时就能确定�
 
 是为了弥补会计作用域不返回值(除非是全局变量)而生的，在块级作用域之前加上do，使它变为do表达式。如下，变量X会得到整个会计作用域的返回值
 
-	let x = do {
+	let x = do { //X的值，为整个do块的返回值
 	  let t = f();
 	  t * t + 1;
 	};
 
 **const命令**
 
-const声明一个只读的常量。一旦声明，常量的值就不能改变。且声明后，必须赋值，否则就会报错，与let命令相似，只在声明所在的会计作用域内有效，且不可重复声明。const命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。
+const声明一个只读的常量。一旦声明，常量的值就不能改变。且声明后，必须赋值，否则就会报错，与let命令相似，只在声明所在的块级作用域内有效，且不可重复声明。const命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。
 
 	var message = "Hello!";
 	let age = 25;
 
-	// 以下两行都会报错
+	// 以下两行都会报错--不可重复声明
 	const message = "Goodbye!";
 	const age = 30;
 
@@ -172,7 +172,7 @@ const声明一个只读的常量。一旦声明，常量的值就不能改变。
 
 	foo = {}; // TypeError: "foo" is read-only
 
-如果真的想将对象冻结，应该使用Object.freeze方法。
+如果真的想将对象冻结（使该对象不可被重写），应该使用Object.freeze方法。
 
 	const foo = Object.freeze({});
 
@@ -181,7 +181,10 @@ const声明一个只读的常量。一旦声明，常量的值就不能改变。
 
 除了将对象本身冻结，对象的属性也应该冻结。下面是一个将对象彻底冻结的函数。
 
-	var constantize = (obj) => {
+**(记住如下写法！！_renderTable()字符串模板拼接+组件化追加html标签)**
+
+
+	 var constantize = (obj) => {
 	  Object.freeze(obj);
 	  Object.keys(obj).forEach( (key, value) => {
 	    if ( typeof obj[key] === 'object' ) {
@@ -198,6 +201,8 @@ const声明一个只读的常量。一旦声明，常量的值就不能改变。
 - 浏览器和 Web Worker 里面，self也指向顶层对象，但是Node没有self。
 - Node 里面，顶层对象是global，但其他环境都不支持。
 
+**组件中this到me的对应传递**
+
 ##在所有环境拿到global。
 让global对象在各种环境都是存在的---》
 
@@ -213,6 +218,9 @@ const声明一个只读的常量。一旦声明，常量的值就不能改变。
 	// ES6模块的写法
 	import getGlobal from 'system.global';
 	const global = getGlobal();
+
+
+
 
 #第二章 变量的解构赋值
 **解构:**

@@ -47,7 +47,7 @@
 - utils目录：存放全局的.js文件，公共的一些调用方法可以放在此处。
 
 参考：
-1.《小程序，巧应用》
-2.微信开发官方文档：https://mp.weixin.qq.com/debug/wxadoc/dev/
-3.http://www.cnblogs.com/thebeauty/p/6421355.html
+1. 《小程序，巧应用》
+2. 微信开发官方文档：https://mp.weixin.qq.com/debug/wxadoc/dev/
+3. http://www.cnblogs.com/thebeauty/p/6421355.html
 

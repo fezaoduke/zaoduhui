@@ -7,6 +7,21 @@
 
 ## 每期图书
 
+### 第四期 @2017.03.06
+书名 | 借阅者
+--------- | -------------
+[ES6 标准入门（第2版）](https://book.douban.com/subject/26708954/) | @491397425 
+[实战ES2015](https://book.douban.com/subject/26899930/) | @ooOANOoo
+[迈向Angular 2：基于TypeScript的高性能SPA框架](https://book.douban.com/subject/26852120/) | @18222871582 
+[Vue.js权威指南](https://book.douban.com/subject/26869340/) | @alove-you
+[深入React技术栈](https://book.douban.com/subject/26918038/) | @lzxiaofengzi
+[Ionic实战，基于AngularJS的移动混合应用开发](https://book.douban.com/subject/26838003/)| @zhuni_ni
+[Html5基础知识、核心技术与前沿案例](https://book.douban.com/subject/26910018/)| @gfhh53281
+[Javascript设计模式与开发实践](https://book.douban.com/subject/26382780/)| @CYAIZXY
+[大型网站性能（监测、分析与优化）](https://book.douban.com/subject/26832764/)| @chj_0507
+[小程序，巧应用（微信小程序开发实战）](https://book.douban.com/subject/26952144/)| @18779115213
+
+
 ### 第三期 @2016.12.19
 书名 | 借阅者
 --------- | -------------

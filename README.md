@@ -1,5 +1,26 @@
 # 前端早读课@早读汇
 
+书名 | 数量（本）
+--------- | -------------
+[css揭秘](https://book.douban.com/subject/26745943/) | 2
+[ES6 标准入门（第2版）](https://book.douban.com/subject/26708954/) | 1 
+[实战ES2015](https://book.douban.com/subject/26899930/) | 2
+[迈向Angular 2：基于TypeScript的高性能SPA框架](https://book.douban.com/subject/26852120/) | 1 
+[Vue.js权威指南](https://book.douban.com/subject/26869340/) | 1
+[深入React技术栈](https://book.douban.com/subject/26918038/) | 2
+[Ionic实战，基于AngularJS的移动混合应用开发](https://book.douban.com/subject/26838003/)| 1
+[Html5基础知识、核心技术与前沿案例](https://book.douban.com/subject/26910018/)| 2
+[Javascript设计模式与开发实践](https://book.douban.com/subject/26382780/)| 1
+[大型网站性能（监测、分析与优化）](https://book.douban.com/subject/26832764/)| 2
+[小程序，巧应用（微信小程序开发实战）](https://book.douban.com/subject/26952144/)| 4
+[DOM启蒙](https://book.douban.com/subject/25882606/) | 1
+[React全栈：Redux+Flux+webpack+Babel整合开发](https://book.douban.com/subject/26901067/)| 2
+[React Native入门与实战](https://book.douban.com/subject/26694486/) | 1
+[React与Redux开发实例精解](https://book.douban.com/subject/26694486/) | 1
+[揭秘Angular2](https://book.douban.com/subject/26945538/) | 2
+[Node.js项目实战-构建可扩展的Web应用](https://book.douban.com/subject/26391998/) | 1
+
+
 ## 说明
 
 * 一级目录：图书名字

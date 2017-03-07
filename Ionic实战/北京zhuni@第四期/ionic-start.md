@@ -15,7 +15,6 @@
 1. ionic start mydemo blank --v2
 
 
-
 ### angular2 
 
 1. angular2中核心的三个部分 Route Module、component

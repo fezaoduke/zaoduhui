@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>css揭秘练习</title>
+		<style media="screen">
+			.ul_1{
+				list-style: none;
+			}
+			.ul_1 li {
+				margin: 10px;
+				display: inline-block;
+			}
+			.div_1 {
+				width:110px;
+				height: 110px;
+				background: yellowgreen;
+				border: 10px solid #655;
+				outline: 5px solid deeppink;
+			}
+			.div_2 {
+				width:110px;
+				height: 110px;
+				background: #655;
+				/*border: 1px dashed #fff;*/
+				outline: 1px dashed #fff;
+				outline-offset: -10px;
+			}
+			.div_3 {
+				width:110px;
+				height: 110px;
+				background: tan;
+				border-radius: .8em;
+				padding: 1em;
+				box-shadow: 0 0 0 .6em #655;
+				outline: .6em solid #655;
+			}
+			.div_4 {
+				width:110px;
+				height: 110px;
+				background:linear-gradient(#fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);
+				background-size: 100% 45px;
+			}
+			.div_5 {
+				width:110px;
+				height: 110px;
+				background:linear-gradient(to right,#fb3 50%, #58a 0); /* top right == 90deg*/
+				background-size: 30px 100%;
+			}
+			.div_6 {
+				width:110px;
+				height: 110px;
+				background:linear-gradient(45deg,#fb3 50%, #58a 0);
+				background-size: 30px 30px;
+			}
+			.div_7 {
+				width:110px;
+				height: 110px;
+				background:linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75%, #58a 0);
+				/*background-size: 30px 30px;*/
+				background-size: 42px 42px;
+			}
+			.div_8 {
+				width:110px;
+				height: 110px;
+				background:repeating-linear-gradient(60deg, #fb3, #58a 30px);
+			}
+			.div_9 {
+				width:110px;
+				height: 110px;
+				background: #58a;
+				background-image: repeating-linear-gradient(30deg, hsla(0, 0%, 100%, .1), hsla(0, 0%, 100%, .1) 15px,transparent 0, transparent 30px);
+				/*background:repeating-linear-gradient(45deg, #fb3 0, #fb3 25%, #58a 0, #58a 50%);
+				background-size: 43px 43px;
+			}*/
+		</style>
+	</head>
+	<body>
+	<ul class="ul_1">
+		<li><div class="div_1">图2-6</div></li>
+		<li><div class="div_2">图2-8</div></li>
+		<li><div class="div_3">图2-15</div></li>
+		<li><div class="div_4">图2-27</div></li>
+		<li><div class="div_5">图2-28</div></li>
+		<li><div class="div_6">图2-29</div></li>
+		<li><div class="div_7">图2-30</div></li>
+		<li><div class="div_8">图2-33 60度斜条纹</div></li>
+		<li><div class="div_9">图2-37 同色系斜条纹</div></li>
+	</ul>
+	</body>
+</html>

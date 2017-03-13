@@ -11,6 +11,8 @@
 			.ul_1 li {
 				margin: 10px;
 				display: inline-block;
+				margin-bottom: 10px;
+				border-bottom: 1px dashed #999;
 			}
 			.div_1 {
 				width:110px;
@@ -72,21 +74,68 @@
 				background: #58a;
 				background-image: repeating-linear-gradient(30deg, hsla(0, 0%, 100%, .1), hsla(0, 0%, 100%, .1) 15px,transparent 0, transparent 30px);
 				/*background:repeating-linear-gradient(45deg, #fb3 0, #fb3 25%, #58a 0, #58a 50%);
-				background-size: 43px 43px;
-			}*/
+				background-size: 43px 43px;*/
+			}
+			.figture_1{
+				max-width: 300px;
+					max-width: min-content;
+					margin: auto;
+			}
+			.figture_1 img{
+				max-width: inherit;
+			}
+			.table_layout{
+				table-layout: fixed;
+				width:100%;
+				text-overflow: ellipsis;
+			}
+			.table_layout tr td:nth-child(2){
+				width:400px;
+			}
 		</style>
 	</head>
 	<body>
-	<ul class="ul_1">
-		<li><div class="div_1">图2-6</div></li>
-		<li><div class="div_2">图2-8</div></li>
-		<li><div class="div_3">图2-15</div></li>
-		<li><div class="div_4">图2-27</div></li>
-		<li><div class="div_5">图2-28</div></li>
-		<li><div class="div_6">图2-29</div></li>
-		<li><div class="div_7">图2-30</div></li>
-		<li><div class="div_8">图2-33 60度斜条纹</div></li>
-		<li><div class="div_9">图2-37 同色系斜条纹</div></li>
-	</ul>
+	<section class="section_1">
+		<ul class="ul_1">
+			<li><div class="div_1">图2-6</div></li>
+			<li><div class="div_2">图2-8</div></li>
+			<li><div class="div_3">图2-15</div></li>
+			<li><div class="div_4">图2-27</div></li>
+			<li><div class="div_5">图2-28</div></li>
+			<li><div class="div_6">图2-29</div></li>
+			<li><div class="div_7">图2-30</div></li>
+			<li><div class="div_8">图2-33 60度斜条纹</div></li>
+			<li><div class="div_9">图2-37 同色系斜条纹</div></li>
+		</ul>
+	</section>
+
+	<section class="section_2">
+		<ul class="ul_1">
+			<li style="width:60%;">
+				<P> 挥手自兹去，萧萧班马鸣。。。</P>
+				<figure class="figture_1">
+					<img src="images/0.jpg" alt="内容宽自适应">
+					<figcaption>噫吁嚱， 危乎高哉！ 蜀道之难， 难于上青天！ 蚕丛及鱼凫， 开国何茫然！ 尔来四万八千岁， 不与秦塞通人烟。 西当太白有鸟道， 可以横绝峨眉巅。 地崩山摧壮士死， 然后天梯石栈相钩连。 上有六龙回日之高标， 下有冲波逆折之回川。 黄鹤之飞尚不得过， 猿猱欲度愁攀援。 青泥何盘盘， 百步九折萦岩峦。
+					 扪参历井仰胁息， 以手抚膺坐长叹。问君西游何时还？ 畏途巉岩不可攀。 但见悲鸟号古木，<br> 雄飞雌从绕林间。 又闻子规啼夜月， 愁空山。 蜀道之难， 难于上青天， 使人听此凋朱颜！ 连峰去天不盈尺， 枯松倒挂倚绝壁。 飞湍瀑流争喧豗， 砯崖转石万壑雷。 其险也如此，
+					  嗟尔远道之人胡为乎来哉！剑阁峥嵘而崔嵬， 一夫当关， 万夫莫开。 所守或匪亲， 化为狼与豺。 朝避猛虎， 夕避长蛇； 磨牙吮血， 杀人如麻。 锦城虽云乐， 不如早还家。 蜀道之难， 难于上青天， 侧身西望长咨嗟！</figcaption>
+				</figure>
+				<p>蜀道难</p>
+			</li>
+			<li>
+				<table class="table_layout">
+					<thead>
+						<tr><th colspan="4">精确控制表格列宽</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>aaa</td><td>aaab</td><td>aaabc</td><td>aaabcd</td></tr>
+						<tr><td>aaa</td><td>aaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaab</td><td>aaabc</td><td>aaabcd</td></tr>
+						<tr><td>aaa</td><td>aaab</td><td>aaabc</td><td>aaabcd</td></tr>
+						<tr><td>aaa</td><td>aaab</td><td>aaabc</td><td>aaabcd</td></tr>
+					</tbody>
+				</table>
+			</li>
+		</ul>
+	</section>
+
 	</body>
 </html>

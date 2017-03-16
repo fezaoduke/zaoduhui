@@ -36,7 +36,9 @@
 * babel-node
 	- babel-cli自带babel-node
 	- 提供一个支持es6的REPL环境，可直接运行es6
+
 			REPL：交互式解析器
+
 				退出：.exit/ctrl+c两次
 		
 		__dirname：当前执行的JS所在的文件夹
@@ -65,7 +67,9 @@
 	- babel-standalone
 	
 * 与其他工具配合
+
 		elsint，babel-eslint
+		
 		.eslintrc
 	
 * Traceur转码器

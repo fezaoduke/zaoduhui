@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>背景-exercises</title>
+		<style media="screen">
+			html,body,div,ul,li,p,span,a{
+				margin:0;
+				padding: 0;
+				color: #fff;
+				text-align: center;
+			}
+			div{
+				background-color: #ddbe9f;
+			}
+			.clearfix:after {
+			    visibility: hidden;
+			    display: block;
+			    font-size: 0;
+			    content: " ";
+			    clear: both;
+			    height: 0
+			}
+			.ul_1{
+				list-style: none;
+			}
+			.ul_1 li {
+				float: left;
+				margin: 10px;
+				padding: 10px;
+				width:200px;
+				height: 200px;
+				display: inline-block;
+				margin-bottom: 10px;
+				border: 1px dashed #999;
+			}
+			.div_1 {
+				width:70px;
+				height: 160px;
+				line-height: 160px;
+				border-radius: 35px;
+			}
+			.div_2{
+				width: 70px;
+				height: 160px;
+				line-height: 160px;
+				border-radius: 0 80px 80px 0;
+			}
+			.div_3{
+				width: 160px;
+				height: 160px;
+				line-height: 160px;
+			}
+
+			.div_3_1 div{
+				/*display: inline-block; 有间隔*/
+				float: left;
+				width:80px;
+				height:40px;
+				background-color: #f00;
+			}
+			.div_3_2 div {
+				float: left;
+				width:80px;
+				height:110px;
+				background-color: #f00;
+			}
+			.div_3_1 div{
+				border-radius: 40px 40px 0 0;;
+			}
+			.div_3_2 div:first-child {
+				border-radius: 0 0 0 100%;
+			}
+			.div_3_2 div:nth-child(2){
+				border-radius:  0 0 100% 0;
+			}
+			.div_4 {
+				width:160px;
+				height: 80px;
+				border-radius: 0 100% 100% 0 / 50%;
+			}
+			.div_5{
+				width:80px;
+				height: 160px;
+				line-height: 160px;
+				border-radius:  0 0 0 100%;
+
+			}
+			.div_6 {
+				width:160px;
+				height: 80px;
+				line-height: 80px;
+				transform: skewX(25deg)  translateY(50px);
+			}
+			.div_6 p{
+				transform: skewX(-25deg);
+			}
+			.div_7 { /* 宿主元素*/
+				position:relative;
+				width:160px;
+				height: 80px;
+				line-height: 80px;
+				transform: skewX(25deg) ;
+			}
+			.div_7::before{
+				content: '';
+				position: absolute;
+				top: 0;left: 0;right: 0;bottom: 0;
+				z-index: -1; /* 将为元素的堆叠层侧推到宿主元素之后 */
+				background-color: #afb6a4;
+				transform: skewX(-25deg);
+			}
+		</style>
+	</head>
+	<body>
+	<section class="section_1">
+		<ul class="ul_1 clearfix">
+			<li><div class="div_1">图3-5</div></li>
+			<li><div class="div_2">图3-6</div></li>
+			<li>
+				<div class="div_3">
+					<div class="div_3_1 clearfix">
+						<div></div>
+						<div></div>
+					</div>
+					<div class="div_3_2 clearfix">
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+			</li>
+			<li><div class="div_4"></div></li>
+			<li><div class="div_5">图3-9</div></li>
+			<li><div class="div_6"><p>图3-11</p></div></li>
+			<li><div class="div_7">图3-11 为元素实现</div></li>
+		</ul>
+	</section>
+
+
+	</body>
+</html>

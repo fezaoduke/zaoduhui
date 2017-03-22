@@ -1,0 +1,217 @@
+## module的加载实现
+
+这章对比了一下书和网站。觉着还是看网站好一些，东西讲的多一些，顺便可以复习或者说
+学习到一些以前根本没注意并且你不懂得东西。并且可以学习到一些CommonJS的知识
+（即使你不想学也可以拿出去装一哈，哈哈）
+
+以前呢，我们加载js的话可以通过2种方式，一个是在页面内嵌，另一个是外部引用。想要
+节省js脚本下载的时间或者防止阻塞呢就要使用`异步`，这里我们都知道可以用`async`或者
+`defer`。这里问一下自己，知道这两个有啥区别吗？哈哈我是不记得了。
+
+来温习一下：     
+defer    整个页面渲染结束才执行               按出现顺序加载   
+async    下载完浏览器现在干的事就停止您先     不保证加载顺序
+
+现在用es6模块加载呢，一样要使用`<script>`标签,但是要有`type="module"`,这样浏览器
+就会默认认为你是异步加载，并且相当于`defer`，同时你也可以加上`async`让他是您先的
+执行顺序。
+
+当你外部引用模块脚本时，要注意这几点：
+
++ 代码是在模块作用域之中运行，而不是在全局作用域运行。模块内部的顶层变量，外部不可见。
++ 模块脚本自动采用严格模式，不管有没有声明use strict。
++ 模块之中，可以使用import命令加载其他模块（.js后缀不可省略，需要提供绝对 URL 
+  或相对 URL），也可以使用export命令输出对外接口。
++ 模块之中，顶层的this关键字返回undefined，而不是指向window。也就是说，
+  在模块顶层使用this关键字，是无意义的。
++ 同一个模块如果加载多次，将只执行一次。
+
+
+tips：
+利用顶层的`this`等于`undefined`这个语法点，可以`侦测`当前代码是否在 ES6 模块之中。
+```javascript
+const isNotModuleScript = this !== undefined;
+```
+
+### es6模块与CommomJS模块的区别
+
++ CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。
++ CommonJS 模块是运行时加载，ES6 模块是编译时输出接口。
+
+>第二个差异是因为 CommonJS 加载的是一个对象（即module.exports属性），
+该对象只有在脚本运行完才会生成。而 ES6 模块不是对象，它的对外接口只是一种静态定义，
+在代码静态解析阶段就会生成。
+
+CommonJS 模块输出的是值的拷贝，一旦`输出一个值`，模块内部的变化`就影响不到`这个值。
+除非写成一个函数，才能得到内部变动后的值。
+```javascript
+// lib.js
+var counter = 3;
+function incCounter() {
+  counter++;
+}
+module.exports = {
+  counter: counter,
+  incCounter: incCounter,
+};
+
+// main.js
+var mod = require('./lib');
+
+console.log(mod.counter);  // 3
+mod.incCounter();
+console.log(mod.counter); // 3
+
+
+// 写成这样就可以了
+// lib.js
+var counter = 3;
+function incCounter() {
+  counter++;
+}
+module.exports = {
+  get counter() {
+    return counter
+  },
+  incCounter: incCounter,
+};
+```
+ES6 模块是`动态引用`，并且`不会缓存值`，模块里面的变量绑定其所在的模块。
+原始值变了，import加载的值也会跟着变。
+
+```javascript
+// lib.js
+export let counter = 3;
+export function incCounter() {
+  counter++;
+}
+
+// main.js
+import { counter, incCounter } from './lib';
+console.log(counter); // 3
+incCounter();
+console.log(counter); // 4
+```
+看这里就有变化了。
+
+ ES6 输入的模块变量是`只读的`，对它进行`重新赋值会报错`。
+ 
+ 最后，export通过接口，输出的是同一个值。
+ `不同的脚本`加载这个接口，得到的都是`同样的实例`。
+ 
+### Node的加载
+ 
+平时其实一直搞不太懂这个到底是怎么import的，路径用的很迷糊。
+这里我们来学习一下。
+
+在静态分析阶段，一个模块脚本只要有一行import或export语句，Node 就会认为该脚本为
+ES6 模块，否则就为 CommonJS 模块。如果不输出任何接口，但是希望被 Node 认为是
+ES6 模块，可以在脚本中加一行语句。
+```javascript 
+export {}; // 这是一个不输出任何接口的 ES6 标准写法
+```
+如何不指定绝对路径，Node 加载 ES6 模块会依次寻找以下脚本，与require()的规则一致。
+
+```javascript
+import './foo';
+// 依次寻找
+//   ./foo.js
+//   ./foo/package.json
+//   ./foo/index.js
+
+import 'baz';
+// 依次寻找
+//   ./node_modules/baz.js
+//   ./node_modules/baz/package.json
+//   ./node_modules/baz/index.js
+// 寻找上一级目录
+//   ../node_modules/baz.js
+//   ../node_modules/baz/package.json
+//   ../node_modules/baz/index.js
+// 再上一级目录
+```
+### import命令加载CommonJS模块
+Node 采用 CommonJS 模块格式，模块的输出都定义在module.exports这个属性上面。
+在 Node 环境中，使用import命令加载 CommonJS 模块，Node 会自动将module.exports
+属性，当作模块的默认输出，即等同于export default。
+
+```javascript
+// a.js
+module.exports = {
+  foo: 'hello',
+  bar: 'world'
+};
+
+// 等同于
+export default {
+  foo: 'hello',
+  bar: 'world'
+};
+```
+
+### require命令加载es6模块
+
+采用require命令加载 ES6 模块时，ES6 模块的所有输出接口，会成为输入对象的属性。
+```javascript
+// es.js
+let foo = {bar:'my-default'};
+export default foo;
+foo = null;
+
+// cjs.js
+const es_namespace = require('./es');
+console.log(es_namespace.default);
+// {bar:'my-default'}
+```
+
+### 循环加载
+指的是，a脚本的执行依赖b脚本，而b脚本的执行又依赖a脚本。
+CommonJS和ES6，处理“循环加载”的方法是不一样的，返回的结果也不一样。
+
+CommonJS是怎么做的呢？
+CommonJS的一个模块，就是一个脚本文件。require命令第一次加载该脚本，就会执行整个脚本，
+然后在内存生成一个对象。
+
+```javascript
+{
+  id: '...',
+  exports: { ... },
+  loaded: true,
+  ...
+}
+```
+<上面代码就是Node内部加载模块后生成的一个对象。该对象的id属性是模块名，exports属性是模块输出的各个接口，loaded属性是一个布尔值，表示该模块的脚本是否执行完毕。其他还有很多属性，这里都省略了。
+以后需要用到这个模块的时候，就会到exports属性上面取值。即使再次执行require命令，也不会再次执行该模块，而是到缓存之中取值。也就是说，CommonJS模块无论加载多少次，都只会在第一次加载时运行一次，
+以后再加载，就返回第一次运行的结果，除非手动清除系统缓存。
+
+
+es6又是怎么做的呢？
+
+ES6处理“循环加载”与CommonJS有本质的不同。ES6模块是动态引用，如果使用import从一个模块加载变量（即import foo from 'foo'），那些变量不会被缓存，而是成为一个指向被加载模块的引用，
+需要开发者自己保证，真正取值的时候能够取到值。
+
+```javascript
+// a.js如下
+import {bar} from './b.js';
+console.log('a.js');
+console.log(bar);
+export let foo = 'foo';
+
+// b.js
+import {foo} from './a.js';
+console.log('b.js');
+console.log(foo);
+export let bar = 'bar';
+```
+
+```
+$ babel-node a.js
+b.js
+undefined
+a.js
+bar
+```
+上面代码中，由于a.js的第一行是加载b.js，所以先执行的是b.js。而b.js的第一行又是加载a.js，这时由于a.js已经开始执行了，所以不会重复执行，而是继续往下执行b.js，所以第一行输出的是b.js。
+
+接着，b.js要打印变量foo，这时a.js还没执行完，取不到foo的值，导致打印出来是undefined。b.js执行完，开始执行a.js，这时就一切正常了。
+

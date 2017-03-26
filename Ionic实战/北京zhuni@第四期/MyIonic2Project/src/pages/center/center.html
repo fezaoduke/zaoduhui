@@ -1,0 +1,10 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Center
+    </ion-title>
+    <ion-buttons start [hidden]="!isLogin">
+      <button end ion-button color="danger" clear (click)="logout()">注销</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>

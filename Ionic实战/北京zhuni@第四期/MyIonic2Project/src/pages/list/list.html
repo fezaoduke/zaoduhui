@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My First List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+  <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+    {{ item }}
+  </button> 
+  </ion-list>
+</ion-content>

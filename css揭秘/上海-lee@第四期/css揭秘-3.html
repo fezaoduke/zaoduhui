@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>css揭秘练习</title>
+		<style media="screen">
+			ul {
+				list-style: none;
+			}
+			.li_1 dt,dd{
+				display: inline;
+			}
+			.li_1 dd {
+					margin: 0;
+					font-weight: bold;
+				}
+			.li_1 dd::after {
+				content: "\A";
+				white-space: pre;
+			}
+		</style>
+	</head>
+	<body>
+	<section class="section_1">
+		<ul>
+			<li class="li_1">
+				<dl>
+					<dt>姓名</dt>
+					<dd>大米</dd>
+					<dt>年龄</dt>
+					<dd>与齐</dd>
+					<dt>性别</dt>
+					<dd>掐指一算</dd>
+				</dl>
+			</li>
+		</ul>
+	</section
+	</body>
+</html>

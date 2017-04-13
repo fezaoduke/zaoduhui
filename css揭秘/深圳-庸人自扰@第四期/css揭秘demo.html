@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{
+    padding:0;
+    margin:0;
+    }
+    .tab {
+        position: relative;
+        display: inline-block;
+        padding: .5em 1em .35em;
+        color: white;
+    }
+    
+    .tab::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        background-color: #58a;
+        transform: scaleY(1.3) perspective(.5em) rotateX(5deg);
+        transform-origin: bottom;
+    }
+    
+    .pie {
+        background: yellowgreen;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        background-image: linear-gradient(to right, transparent 50%, #655 0);
+    }
+    
+    .pie::before {
+        content: "";
+        display: block;
+        background-color: inherit;
+        transform-origin: left;
+        height: 100%;
+        margin-left: 50%;
+        border-radius: 0 100% 100% 0 / 50%;
+        animation: spin 50s linear infinite, bg 100s step-end infinite;
+        animation-play-state: paused;
+        animation-delay: inherit;
+    }
+    
+    @keyframes spin {
+        to {
+            transform: rotate(.5turn);
+        }
+    }
+    
+    @keyframes bg {
+        50% {
+            background: #655;
+        }
+    }
+    
+    .juxing {
+        width: 100px;
+        height: 100px;
+        background: yellowgreen;
+        box-shadow: 0 5px 4px black;
+    }
+    
+    .touyin {
+        width: 1.6in;
+        height: 1in;
+        background: yellowgreen;
+        box-shadow: 3px 3px 6px -3px black;
+    }
+    
+    .zhejiao {
+        background: #58a;
+        background: linear-gradient(-135deg, transparent 50%, rgba(0, 0, 0, .4) 0)no-repeat 100% 0%/2em 2em, linear-gradient(-135deg, transparent 1.5em, #58a 0);
+        width: 200px;
+        height: 200px;
+        padding: 2em 1em;
+        box-sizing: border-box;
+    }
+    
+    ul {
+        list-style: none;
+        font-size: 0;
+        position: relative;
+        width: 260px;
+    }
+    
+    li {
+        width: 60px;
+        height: 60px;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        line-height: 60px;
+        background: red;
+        display: inline-block;
+        margin: 10px 10px 0 0;
+    }
+    
+    li:first-child:nth-last-child(2),
+    li:first-child:nth-last-child(2) ~ li {
+        background: yellow;
+    }
+    
+    li:nth-child(3):nth-last-child(2) {
+        background: blue;
+    }
+    
+    ul li:nth-last-child(1) {
+        background: #000;
+        width: 33.3%;
+    }
+    footer{
+        padding:1em;
+    	/*padding:1em calc(50% - 450px);*/
+        background:#333;
+        text-align: center;
+
+    }
+    </style>
+</head>
+
+<body>
+    <div class="tab">This's</div>
+    <div class="pie" style="animation-delay:-60s"></div>
+    <div class="pie" style="animation-delay:-20s"></div>
+    <div class="pie" style="animation-delay: -60s"></div>
+    <div class="juxing"></div>
+    <div class="touyin"></div>
+    <div class="zhejiao">et rid of a temptation is to yield to it. Resist it, and your soul</div>
+    <!-- 根据兄弟元素的数量来设置样式 -->
+    <ul>
+        <li>1</li>
+        <li>2</li>
+    </ul>
+    <ul>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <ul>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+    </ul>
+    <ul>
+        <li>10</li>
+        <li>10</li>
+        <li>10</li>
+        <li>11</li>
+    </ul>
+    <footer>20168-6546@备案号</footer>
+</body>
+
+</html>

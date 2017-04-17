@@ -8,6 +8,11 @@
 			ul {
 				list-style: none;
 			}
+			ul li{
+				margin-left: 10px;
+				float: left;
+				border: 1px dashed #f00;
+			}
 			.li_1 dt,dd{
 				display: inline;
 			}
@@ -15,9 +20,32 @@
 					margin: 0;
 					font-weight: bold;
 				}
-			.li_1 dd::after {
+			/*.li_1 dd::after {
 				content: "\A";
 				white-space: pre;
+			}*/
+			dd + dt::before{
+				content: '\A';
+				white-space: pre;
+			}
+			dd + dd::before{
+				content:', ';
+				font-weight: normal;
+			}
+			.zebra{
+				width:200px;
+				padding: .5em;
+				line-height: 1.5;
+				background: beige;
+				background-size: auto 3em;
+				background-origin: content-box; /* 使 background-position以content-box的外延作为基准 */
+				background-image: linear-gradient(rgba(0,0,0,.2) 50%, transparent 0);
+			}
+			.zebra p{
+					margin: 0;
+			}
+			pre{
+				tab-size: 2;
 			}
 		</style>
 	</head>
@@ -26,13 +54,32 @@
 		<ul>
 			<li class="li_1">
 				<dl>
-					<dt>姓名</dt>
+					<dt>姓名：</dt>
 					<dd>大米</dd>
-					<dt>年龄</dt>
+					<dd>小一</dd>
+					<dd>饕餮</dd>
+					<dt>年龄：</dt>
 					<dd>与齐</dd>
-					<dt>性别</dt>
+					<dt>性别：</dt>
 					<dd>掐指一算</dd>
 				</dl>
+			</li>
+			<li class="li_2">
+				<div class="zebra">
+					<p>条纹背景</p>
+					<p>条纹背景</p>
+					<p>条纹背景</p>
+					<p>条纹背景</p>
+					<p>条纹背景</p>
+				</div>
+			</li>
+			<li class="li_3">
+				<p>代码输出code、pre缩进控制tab-size</p>
+				<pre>
+					 if(true){
+						 console.log('this year is __ for you ;');
+					 }
+				</pre>
 			</li>
 		</ul>
 	</section

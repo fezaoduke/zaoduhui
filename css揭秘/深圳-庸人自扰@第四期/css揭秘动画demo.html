@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+    }
+    
+    @keyframes caret {
+        50% {
+            border-color: currentColor;
+        }
+    }
+    
+    h1 {
+        font: bold 200% Consolas, Monaco, monospace;
+        width: 15ch;
+        animation: typing 8s steps(15), caret 1s steps(1) infinite;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: .05em solid;
+    }
+    
+    .pic {
+        background: url("https://www.baidu.com/img/bd_logo1.png");
+        width: 150px;
+        height: 150px;
+        background-size: auto 100%;
+        animation: pic 10s linear infinite alternate;
+        animation-play-state: paused;
+        /* 动画已暂停 */
+    }
+    
+    .pic:hover,
+    .pic:focus {
+        animation-play-state: running;
+        /* 动画正在播放 */
+        /*animation:pic 10s linear infinite alternate;*/
+    }
+    
+    @keyframes pic {
+        to {
+            background-position: 100% 0;
+        }
+    }
+    .path{
+    	width: 300px;
+    	background: #f9bc09;
+    	height: 300px;
+    	border-radius: 50%;
+    	position: relative;
+    	padding:20px;
+    	box-sizing:border-box;
+    	background-origin: padding-box;
+    	animation:spin 3s infinite linear;
+    	transform-origin:50% 150px;
+
+
+    }
+    .path img{
+    	width: 40px;
+    	height: 40px;
+    	border-radius: 50%;
+    	background-origin: padding-box;
+    	position: absolute;
+    	left: 45%;
+    	top: 6%;
+    	animation:inherit;
+    	animation-direction: reverse;
+    	
+
+    }
+    .path img{
+
+    }
+    @keyframes spin{
+    	to{transform:rotate(1turn);}
+    }
+    /*@keyframes spin-reverse{
+    	from{transform:rotate(1turn);}
+    }*/
+    </style>
+</head>
+
+<body>
+    <!-- 打字机效果 -->
+    <h1>CSS is awesome</h1>
+    <!-- 状态平滑的动画 -->
+    <div class="pic"></div>
+    <!-- 沿环形路径平移的动画 -->
+    <div class="path"><img src="https://www.baidu.com/img/bd_logo1.png" alt="" class="avatr"></div>
+</body>
+
+</html>
